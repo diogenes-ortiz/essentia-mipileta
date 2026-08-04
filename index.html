@@ -479,6 +479,51 @@
 </head>
 <body>
 
+<!-- ================= GATE (traba con contraseña) ================= -->
+<div id="gate">
+  <img src="assets/mp-sintesis.png" alt="Mi Pileta" class="gate-logo">
+  <p class="gate-txt">Sitio privado — ingresá la contraseña</p>
+  <div class="gate-row">
+    <input id="gate-pass" type="password" placeholder="Contraseña" autocomplete="off">
+    <button id="gate-btn">Entrar</button>
+  </div>
+  <p id="gate-err"></p>
+</div>
+<style>
+  #gate{position:fixed;inset:0;z-index:9999;background:#000;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;gap:16px;padding:24px;text-align:center;
+    font-family:"Hanken Grotesk",system-ui,sans-serif;}
+  #gate .gate-logo{height:64px;width:auto;opacity:.92;margin-bottom:6px;}
+  #gate .gate-txt{color:#9a9a9a;font-weight:300;margin:0;letter-spacing:.02em;}
+  #gate .gate-row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;}
+  #gate input{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.18);border-radius:10px;
+    color:#fff;padding:12px 16px;font-family:inherit;font-size:1rem;outline:none;min-width:220px;}
+  #gate input:focus{border-color:rgba(255,255,255,.5);}
+  #gate button{background:linear-gradient(180deg,#565c66,#2a2e34);color:#f4f6f9;border:1px solid rgba(255,255,255,.16);
+    border-radius:10px;padding:12px 26px;font-family:inherit;font-size:.95rem;font-weight:700;cursor:pointer;}
+  #gate #gate-err{color:#d85e5e;font-size:.85rem;min-height:1.1em;margin:0;font-weight:300;}
+</style>
+<script>
+  (function(){
+    var PASS = "essentia2026";
+    var gate = document.getElementById('gate');
+    if(sessionStorage.getItem('essentia_ok') === '1'){ gate.parentNode.removeChild(gate); return; }
+    document.documentElement.style.overflow = 'hidden';
+    function open(){
+      sessionStorage.setItem('essentia_ok','1');
+      document.documentElement.style.overflow = '';
+      gate.parentNode.removeChild(gate);
+    }
+    function tryPass(){
+      if(document.getElementById('gate-pass').value === PASS){ open(); }
+      else { document.getElementById('gate-err').textContent = 'Contraseña incorrecta'; }
+    }
+    document.getElementById('gate-btn').addEventListener('click', tryPass);
+    document.getElementById('gate-pass').addEventListener('keydown', function(e){ if(e.key === 'Enter') tryPass(); });
+    document.getElementById('gate-pass').focus();
+  })();
+</script>
+
 <!-- ================= TOP NAV ================= -->
 <header class="topbar">
   <div class="container inner">
