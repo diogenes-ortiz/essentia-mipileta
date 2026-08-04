@@ -96,9 +96,18 @@
   /* la pileta va arriba (volteada, "al revés"), ancho completo sin negro lateral,
      y abajo el fondo se funde a negro para el texto Essentia */
   .hero{
-    width:100%;aspect-ratio:1672/815;background:#000;
-    background-image:url('assets/essentia-hero.png?v=2');
+    position:relative;width:100%;aspect-ratio:1672/815;background:#000;
+    background-image:url('assets/essentia-hero.png?v=3');
     background-size:cover;background-position:center 78%;background-repeat:no-repeat;
+  }
+  /* "Essentia" como texto real, acero metálico, nítido en cualquier tamaño */
+  .hero-title{
+    position:absolute;left:0;right:0;top:11%;text-align:center;z-index:2;
+    font-family:"Raleway",sans-serif;font-weight:200;
+    font-size:clamp(2.4rem,7vw,7rem);letter-spacing:.16em;line-height:1;
+    background:linear-gradient(180deg,#ffffff 0%,#d6dbe1 16%,#9aa1aa 38%,#676d76 50%,#b3bac3 62%,#f2f5f8 84%,#c2c9d1 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    filter:drop-shadow(0 1px 1px rgba(255,255,255,.12)) drop-shadow(0 2px 8px rgba(0,0,0,.5));
   }
 
   /* ---------- video familia (sin marco, flotante) ---------- */
@@ -433,6 +442,7 @@
 
     /* hero banner vertical solo en mobile */
     .hero{aspect-ratio:887/1774;background-image:url('assets/essentia-hero-mobile.png?v=2');}
+    .hero-title{display:none;}
 
     /* hero 3D más compacto, no domina la pantalla */
     .hero-3d .container{padding-top:36px;}
@@ -541,7 +551,7 @@
 <section id="signature" class="section" style="padding-top:0;">
   <a name="signature"></a>
   <!-- hero banner (crossfade) -->
-  <div class="hero" id="hero"></div>
+  <div class="hero" id="hero"><span class="hero-title">Essentia</span></div>
 
   <div class="hero-3d" id="hero-3d">
     <div class="container" style="padding-top:60px;">
