@@ -254,8 +254,11 @@
   .d-body p{color:var(--muted);font-weight:300;margin:0 0 8px;}
   /* crossfade de colores (gris / negra) */
   .color-media{position:relative;width:100%;aspect-ratio:4/3;border-radius:16px;overflow:hidden;background:#000;}
-  .color-frame{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .9s ease;}
-  .color-frame.active{opacity:1;}
+  .color-frame{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1s cubic-bezier(.4,0,.2,1);}
+  .color-frame.active{opacity:1;z-index:2;}
+  /* la foto saliente queda visible abajo mientras la nueva se funde encima:
+     crossfade sin bajón oscuro en el medio */
+  .color-frame.prev{opacity:1;z-index:1;transition:none;}
   /* viñeta que funde los bordes de la foto con el fondo negro de la página:
      sin esto, en el crossfade se ve el recuadro de la foto contra el fondo */
   .color-media::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
@@ -329,9 +332,12 @@
   .swatch.black{background:linear-gradient(135deg,#3a3a3a,#0a0a0a);}
   .swatch.steel{background:linear-gradient(135deg,#d8d8d8,#9a9a9a);}
   .swatch.goldblack{background:linear-gradient(135deg,#e6c79a,#1a1a1a);}
-  /* terminaciones del panel Modelos y colores: más chicas y despegadas de los pills de modelo */
-  .t3-panel [data-finish-swatches]{gap:12px;margin-top:28px;}
-  .t3-panel [data-finish-swatches] .swatch{width:26px;height:26px;border-width:1.5px;}
+  /* terminaciones del panel Modelos y colores: columna vertical a la IZQUIERDA,
+     por fuera de la foto (así nunca toca la pileta, ni con la 671) */
+  .modelos-row{display:flex;align-items:center;justify-content:center;gap:24px;margin-top:14px;}
+  .modelos-row .color-media{margin:0;flex:0 1 560px;}
+  .modelos-row [data-finish-swatches]{flex-direction:column;gap:12px;margin:0;flex:none;}
+  .modelos-row [data-finish-swatches] .swatch{width:26px;height:26px;border-width:1.5px;}
   .pill{
     padding:8px 20px;border:1px solid #fff;border-radius:99px;background:none;color:#fff;
     cursor:pointer;font-family:inherit;font-size:.85rem;
@@ -612,6 +618,7 @@
             <button class="pill" data-model="670">670</button>
             <button class="pill" data-model="671">671</button>
           </div>
+          <div class="modelos-row">
           <div class="swatches" data-finish-swatches>
             <button class="swatch steel" data-finish="S" title="Satinado"></button>
             <button class="swatch black" data-finish="B" title="Negro grafito"></button>
@@ -628,6 +635,7 @@
             <img class="color-frame" data-key="670B" src="assets/model-670B.jpg" alt="Essentia 670 negra">
             <img class="color-frame" data-key="671S" src="assets/model-671.jpg" alt="Essentia 671 satinada">
             <img class="color-frame" data-key="671B" src="assets/model-671B.jpg" alt="Essentia 671 negra">
+          </div>
           </div>
         </div>
         <div class="t3-panel" data-t3="instalacion">
@@ -655,7 +663,7 @@
         <p>Compartimientos desmontables para un escurrido eficiente y una cocina siempre ordenada.</p>
       </div>
       <div class="product">
-        <div class="acc-img"><img src="assets/acc-tabla.png" alt="Tabla de vidrio"></div>
+        <div class="acc-img"><img src="assets/acc-tabla-1-sinfondo.png" alt="Tabla de vidrio"></div>
         <h3>Tabla de vidrio</h3>
         <p>Superficie de trabajo que se integra a la pileta para ganar espacio y practicidad al cocinar.</p>
       </div>
@@ -989,7 +997,13 @@
     var ORDEN = ['640','620','660','670','671'];
     var model = '640', finish = 'S', locked = false, i = 0;
     function render(){
+      var saliente = media.querySelector('.color-frame.active');
       frames.forEach(function(f){ f.classList.toggle('active', f.getAttribute('data-key') === model + finish); });
+      var entrante = media.querySelector('.color-frame.active');
+      if(saliente && saliente !== entrante){
+        saliente.classList.add('prev');
+        setTimeout(function(){ saliente.classList.remove('prev'); }, 1050);
+      }
       pills.forEach(function(b){ b.classList.toggle('sel', b.getAttribute('data-model') === model); });
       sw.forEach(function(b){
         var disp = FIN[model].indexOf(b.getAttribute('data-finish')) !== -1;
