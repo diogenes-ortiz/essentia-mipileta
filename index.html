@@ -329,6 +329,9 @@
   .swatch.black{background:linear-gradient(135deg,#3a3a3a,#0a0a0a);}
   .swatch.steel{background:linear-gradient(135deg,#d8d8d8,#9a9a9a);}
   .swatch.goldblack{background:linear-gradient(135deg,#e6c79a,#1a1a1a);}
+  /* terminaciones del panel Modelos y colores: más chicas y despegadas de los pills de modelo */
+  .t3-panel [data-finish-swatches]{gap:12px;margin-top:28px;}
+  .t3-panel [data-finish-swatches] .swatch{width:26px;height:26px;border-width:1.5px;}
   .pill{
     padding:8px 20px;border:1px solid #fff;border-radius:99px;background:none;color:#fff;
     cursor:pointer;font-family:inherit;font-size:.85rem;
@@ -609,7 +612,7 @@
             <button class="pill" data-model="670">670</button>
             <button class="pill" data-model="671">671</button>
           </div>
-          <div class="swatches" data-finish-swatches style="margin-top:12px;">
+          <div class="swatches" data-finish-swatches>
             <button class="swatch steel" data-finish="S" title="Satinado"></button>
             <button class="swatch black" data-finish="B" title="Negro grafito"></button>
             <button class="swatch rose" data-finish="R" title="Cobre"></button>
