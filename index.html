@@ -180,7 +180,7 @@
 
   /* Conocé cada detalle — una línea con 3 opciones, panel desplegable */
   .tabs3{max-width:760px;margin:30px auto 0;}
-  .tabs3-bar{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--line);}
+  .tabs3-bar{display:grid;grid-template-columns:repeat(2,1fr);border-bottom:1px solid var(--line);}
   .t3{
     width:100%;background:none;border:0;border-bottom:2px solid transparent;margin-bottom:-1px;
     color:#9a9a9a;font-family:inherit;font-size:1.15rem;font-weight:400;
@@ -596,24 +596,12 @@
     <h2 class="intro-h2" style="text-align:left;">Conocé cada detalle</h2>
     <div class="tabs3">
       <div class="tabs3-bar" id="tabs3-bar">
-        <button class="t3 active" data-t3="colores">Colores</button>
-        <button class="t3" data-t3="medidas">Medidas</button>
+        <button class="t3 active" data-t3="modelos">Modelos y colores</button>
         <button class="t3" data-t3="instalacion">Modos de instalación</button>
       </div>
       <div class="tabs3-panels">
-        <div class="t3-panel active" data-t3="colores">
-          <p>Dos terminaciones de avanzada: acero inoxidable satinado y negro grafito.</p>
-          <div class="swatches" data-color-swatches>
-            <button class="swatch steel" title="Satinado" data-color="steel"></button>
-            <button class="swatch black" title="Negro grafito" data-color="black"></button>
-          </div>
-          <div class="color-media" id="color-media">
-            <img class="color-frame active" data-color="steel" src="assets/color-gris.png" alt="Essentia satinado">
-            <img class="color-frame" data-color="black" src="assets/color-negra.png" alt="Essentia negro grafito">
-          </div>
-        </div>
-        <div class="t3-panel" data-t3="medidas">
-          <p>Cinco modelos —640, 620, 660, 670 y 671— para adaptarse a cada espacio y necesidad.</p>
+        <div class="t3-panel active" data-t3="modelos">
+          <p>Cinco modelos —640, 620, 660, 670 y 671— y hasta tres terminaciones según el modelo: satinado, negro grafito y cobre.</p>
           <div class="swatches" data-model-pills>
             <button class="pill" data-model="640">640</button>
             <button class="pill" data-model="620">620</button>
@@ -621,12 +609,22 @@
             <button class="pill" data-model="670">670</button>
             <button class="pill" data-model="671">671</button>
           </div>
-          <div class="color-media" id="medidas-media">
-            <img class="color-frame active" data-model="640" src="assets/model-640.jpg" alt="Essentia 640">
-            <img class="color-frame" data-model="620" src="assets/model-620.jpg" alt="Essentia 620">
-            <img class="color-frame" data-model="660" src="assets/model-660.jpg" alt="Essentia 660">
-            <img class="color-frame" data-model="670" src="assets/model-670.jpg" alt="Essentia 670">
-            <img class="color-frame" data-model="671" src="assets/model-671.jpg" alt="Essentia 671">
+          <div class="swatches" data-finish-swatches style="margin-top:12px;">
+            <button class="swatch steel" data-finish="S" title="Satinado"></button>
+            <button class="swatch black" data-finish="B" title="Negro grafito"></button>
+            <button class="swatch rose" data-finish="R" title="Cobre"></button>
+          </div>
+          <div class="color-media" id="modelos-media">
+            <img class="color-frame active" data-key="640S" src="assets/model-640.jpg" alt="Essentia 640 satinada">
+            <img class="color-frame" data-key="640B" src="assets/model-640B.jpg" alt="Essentia 640 negra">
+            <img class="color-frame" data-key="620S" src="assets/model-620.jpg" alt="Essentia 620 satinada">
+            <img class="color-frame" data-key="660S" src="assets/model-660.jpg" alt="Essentia 660 satinada">
+            <img class="color-frame" data-key="660B" src="assets/model-660B.jpg" alt="Essentia 660 negra">
+            <img class="color-frame" data-key="660R" src="assets/model-660R.jpg" alt="Essentia 660 cobre">
+            <img class="color-frame" data-key="670S" src="assets/model-670.jpg" alt="Essentia 670 satinada">
+            <img class="color-frame" data-key="670B" src="assets/model-670B.jpg" alt="Essentia 670 negra">
+            <img class="color-frame" data-key="671S" src="assets/model-671.jpg" alt="Essentia 671 satinada">
+            <img class="color-frame" data-key="671B" src="assets/model-671B.jpg" alt="Essentia 671 negra">
           </div>
         </div>
         <div class="t3-panel" data-t3="instalacion">
@@ -976,8 +974,37 @@
       });
     });
   }
-  setupCrossfade('color-media', '[data-color-swatches] [data-color]', 'data-color');
-  setupCrossfade('medidas-media', '[data-model-pills] [data-model]', 'data-model');
+  // Modelos y colores fusionados: pills de modelo + terminaciones disponibles por modelo
+  // (no todos los modelos vienen en todos los colores)
+  (function(){
+    var media = document.getElementById('modelos-media');
+    if(!media) return;
+    var frames = media.querySelectorAll('.color-frame');
+    var pills = document.querySelectorAll('[data-model-pills] [data-model]');
+    var sw = document.querySelectorAll('[data-finish-swatches] [data-finish]');
+    var FIN = {'620':['S'],'640':['S','B'],'660':['S','B','R'],'670':['S','B'],'671':['S','B']};
+    var ORDEN = ['640','620','660','670','671'];
+    var model = '640', finish = 'S', locked = false, i = 0;
+    function render(){
+      frames.forEach(function(f){ f.classList.toggle('active', f.getAttribute('data-key') === model + finish); });
+      pills.forEach(function(b){ b.classList.toggle('sel', b.getAttribute('data-model') === model); });
+      sw.forEach(function(b){
+        var disp = FIN[model].indexOf(b.getAttribute('data-finish')) !== -1;
+        b.style.display = disp ? '' : 'none';
+        b.classList.toggle('sel', b.getAttribute('data-finish') === finish);
+      });
+    }
+    pills.forEach(function(b){ b.addEventListener('click', function(){
+      locked = true; model = b.getAttribute('data-model');
+      if(FIN[model].indexOf(finish) === -1) finish = 'S';
+      render();
+    }); });
+    sw.forEach(function(b){ b.addEventListener('click', function(){
+      locked = true; finish = b.getAttribute('data-finish'); render();
+    }); });
+    setInterval(function(){ if(!locked){ i = (i+1) % ORDEN.length; model = ORDEN[i]; finish = 'S'; render(); } }, 5000);
+    render();
+  })();
 
   // Conocé cada detalle — selector vertical: cambia panel de texto + foto
   (function(){
