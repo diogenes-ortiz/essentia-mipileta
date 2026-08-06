@@ -97,9 +97,14 @@
      y abajo el fondo se funde a negro para el texto Essentia */
   .hero{
     position:relative;width:100%;aspect-ratio:1672/815;background:#000;
+    margin-top:36px; /* aire entre el nav y el banner (el borde superior de la foto es negro puro) */
+    overflow:hidden;
+  }
+  /* la foto vive en ::before para poder animarla sin afectar al wordmark */
+  .hero::before{
+    content:"";position:absolute;inset:0;z-index:0;
     background-image:url('assets/essentia-hero.png?v=3');
     background-size:cover;background-position:center 78%;background-repeat:no-repeat;
-    margin-top:36px; /* aire entre el nav y el banner (el borde superior de la foto es negro puro) */
   }
   /* wordmark oficial "Essentia" (assets/essentia-wordmark.png, 4402x827) usado como
      máscara sobre el gradiente acero: letras oficiales + acabado metálico, vector-crisp */
@@ -442,6 +447,27 @@
   .loc-pin::after{content:"";position:absolute;inset:7px;background:#0a0a0b;border-radius:50%;}
   @keyframes pin-drop{from{opacity:0;transform:translate(-50%,-160%);}to{opacity:1;transform:translate(-50%,-100%);}}
 
+  /* ============ ANIMACIÓN DE ENTRADA ============ */
+  @keyframes ess-fade-down{from{opacity:0;transform:translateY(-16px);}to{opacity:1;transform:translateY(0);}}
+  @keyframes ess-hero-zoom{from{opacity:0;transform:scale(.92);}to{opacity:1;transform:scale(1);}}
+  @keyframes ess-title-in{from{opacity:0;transform:translateX(-50%) translateY(26px);}to{opacity:1;transform:translateX(-50%) translateY(0);}}
+
+  html.js .topbar{animation:ess-fade-down .7s ease both;}
+  /* 1º entra el wordmark Essentia... */
+  html.js .hero-title{animation:ess-title-in .9s cubic-bezier(.22,.61,.36,1) .15s both;}
+  /* ...y unos ms después la pileta con zoom-in */
+  html.js .hero::before{animation:ess-hero-zoom 1.6s cubic-bezier(.22,.61,.36,1) .5s both;}
+
+  /* revelado suave de secciones al scrollear */
+  html.js .ess-reveal{opacity:0;transform:translateY(28px);
+    transition:opacity .9s cubic-bezier(.22,.61,.36,1), transform .9s cubic-bezier(.22,.61,.36,1);}
+  html.js .ess-reveal.in-view{opacity:1;transform:translateY(0);}
+
+  @media (prefers-reduced-motion: reduce){
+    html.js .topbar,html.js .hero::before,html.js .hero-title{animation:none;}
+    html.js .ess-reveal{opacity:1;transform:none;transition:none;}
+  }
+
   /* footer */
   .foot{background:#0a0a0a;padding:40px 0;text-align:center;color:#777;font-size:.85rem;font-weight:300;}
   .foot img{height:34px;margin:0 auto 18px;opacity:.9;}
@@ -462,7 +488,8 @@
     .lead{font-size:.95rem;}
 
     /* hero banner vertical solo en mobile */
-    .hero{aspect-ratio:887/1774;background-image:url('assets/essentia-hero-mobile.png?v=2');margin-top:0;}
+    .hero{aspect-ratio:887/1774;margin-top:0;}
+    .hero::before{background-image:url('assets/essentia-hero-mobile.png?v=2');}
     .hero-title{display:none;}
 
     /* hero 3D más compacto, no domina la pantalla */
@@ -507,6 +534,7 @@
     .intro-h2{font-size:1.7rem;}
   }
 </style>
+<script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
 
@@ -1076,6 +1104,26 @@
       dots[current].classList.add('active');
     }
   });
+</script>
+<script>
+  // Revelado suave de secciones al entrar en pantalla
+  (function(){
+    var targets = document.querySelectorAll('.section:not(#signature), .foot');
+    targets.forEach(function(el){ el.classList.add('ess-reveal'); });
+    if(!('IntersectionObserver' in window)){
+      targets.forEach(function(el){ el.classList.add('in-view'); });
+      return;
+    }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){
+          e.target.classList.add('in-view');
+          io.unobserve(e.target);
+        }
+      });
+    }, {threshold:.12, rootMargin:'0px 0px -40px 0px'});
+    targets.forEach(function(el){ io.observe(el); });
+  })();
 </script>
 </body>
 </html>
