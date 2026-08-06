@@ -349,7 +349,11 @@
   .acc-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:36px;}
   @media(max-width:900px){.acc-cards{grid-template-columns:repeat(2,1fr);}}
   @media(max-width:520px){.acc-cards{grid-template-columns:1fr;}}
-  .product{background:var(--card);border-radius:var(--radius);padding:18px;border:1px solid #161616;}
+  .product{background:var(--card);border-radius:var(--radius);padding:18px;border:1px solid #161616;overflow:hidden;}
+  /* tabla de vidrio: la foto viene recortada por el lado derecho, así que sangra
+     desde el borde derecho de la card y el corte queda fuera de vista */
+  .acc-img-der{justify-content:flex-end;padding-right:0;}
+  .acc-img-der img{margin-right:-18px;}
   .product h3{font-size:1.2rem;font-weight:400;margin:16px 0 8px;}
   .product p{color:var(--muted);font-size:.9rem;font-weight:300;margin:0;}
 
@@ -663,7 +667,7 @@
         <p>Compartimientos desmontables para un escurrido eficiente y una cocina siempre ordenada.</p>
       </div>
       <div class="product">
-        <div class="acc-img"><img src="assets/acc-tabla-1-sinfondo.png" alt="Tabla de vidrio"></div>
+        <div class="acc-img acc-img-der"><img src="assets/acc-tabla-1-sinfondo.png" alt="Tabla de vidrio"></div>
         <h3>Tabla de vidrio</h3>
         <p>Superficie de trabajo que se integra a la pileta para ganar espacio y practicidad al cocinar.</p>
       </div>
