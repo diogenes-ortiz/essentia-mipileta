@@ -332,11 +332,11 @@
   .swatch.black{background:linear-gradient(135deg,#3a3a3a,#0a0a0a);}
   .swatch.steel{background:linear-gradient(135deg,#d8d8d8,#9a9a9a);}
   .swatch.goldblack{background:linear-gradient(135deg,#e6c79a,#1a1a1a);}
-  /* terminaciones del panel Modelos y colores: columna vertical a la IZQUIERDA,
-     por fuera de la foto (así nunca toca la pileta, ni con la 671) */
+  /* terminaciones del panel Modelos y colores: columna vertical a la DERECHA,
+     por fuera de la foto (así nunca toca la pileta, ni con la 671), centrada a su altura */
   .modelos-row{display:flex;align-items:center;justify-content:center;gap:24px;margin-top:14px;}
   .modelos-row .color-media{margin:0;flex:0 1 560px;}
-  .modelos-row [data-finish-swatches]{flex-direction:column;gap:12px;margin:0;flex:none;}
+  .modelos-row [data-finish-swatches]{flex-direction:column;gap:12px;margin:0;flex:none;order:2;}
   .modelos-row [data-finish-swatches] .swatch{width:26px;height:26px;border-width:1.5px;}
   .pill{
     padding:8px 20px;border:1px solid #fff;border-radius:99px;background:none;color:#fff;
