@@ -30,7 +30,7 @@ Partió como réplica del template **Signature Series de Johnson Acero** y se ad
    - Desktop: `familia-essentia.mp4`. Mobile: `familia-mobile.mp4` (H.264 540×960).
 5. **"Conocé cada detalle"** — barra de **3 opciones en una línea** (Colores · Medidas · Modos de instalación), centradas (Medidas justo al centro), el panel se despliega debajo:
    - **Colores:** crossfade automático gris↔negra (`color-gris.png` / `color-negra.png`) + swatches satinado/negro (el seleccionado se agranda).
-   - **Medidas:** ciclo de 4 fotos de modelos + pills **640 → 660 → 670 → 671** (siempre de la más chica a la más grande).
+   - **Medidas:** ciclo de 5 fotos oficiales (renders satinados fondo negro, `model-620/640/660/670/671.jpg`, 3072px) + pills **620 → 640 → 660 → 670 → 671** (siempre de la más chica a la más grande). Fuente: carpetas `Downloads/<modelo>S/` ("con negro"); OJO: los nombres de archivo adentro pueden estar mal etiquetados, la carpeta es lo que vale.
    - **Instalación:** pills (Enrasada / Bajo mesada / Sobre mesada) + placeholder de imagen.
 6. **Accesorios** — "Todo lo que necesitás, incluido" + 4 cards con fotos **transparentes**:
    Barra escurridora (`acc-barra.png`), Tabla de vidrio (`acc-tabla.png`), Dosificador (`acc-dosificador.png`), Cesto escurridor (`acc-cesto.png`) + botón Comprar en Mercado Libre.
@@ -47,7 +47,7 @@ Partió como réplica del template **Signature Series de Johnson Acero** y se ad
 
 ## Notas técnicas (importante para no romper)
 - **Padding de títulos:** `.section` usa `padding-block` (no `padding` shorthand) para no pisar el padding horizontal de `.container`. Si se vuelve a `padding: X 0`, los títulos tocan los bordes.
-- **Medidas:** el mapeo de fotos 660/670 está cruzado a propósito (data-model 670 → `model-660.png`, etc.) porque los archivos venían invertidos.
+- **Medidas:** el mapeo es directo (data-model 620 → `model-620.jpg`, etc.) con las fotos oficiales; el viejo cruce 660/670 de los `.png` ya no aplica.
 - **Master de video:** el `.mov` original está en **ProRes** → NO reproduce en navegadores; siempre usar export **H.264 .mp4**.
 - El botón flotante de WhatsApp fue **eliminado**.
 
