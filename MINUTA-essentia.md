@@ -30,7 +30,7 @@ Partió como réplica del template **Signature Series de Johnson Acero** y se ad
    - Desktop: `familia-essentia.mp4`. Mobile: `familia-mobile.mp4` (H.264 540×960).
 5. **"Conocé cada detalle"** — barra de **3 opciones en una línea** (Colores · Medidas · Modos de instalación), centradas (Medidas justo al centro), el panel se despliega debajo:
    - **Colores:** crossfade automático gris↔negra (`color-gris.png` / `color-negra.png`) + swatches satinado/negro (el seleccionado se agranda).
-   - **Medidas:** ciclo de 5 fotos oficiales (renders satinados fondo negro, `model-620/640/660/670/671.jpg`, 3072px) + pills **620 → 640 → 660 → 670 → 671** (siempre de la más chica a la más grande). Fuente: carpetas `Downloads/<modelo>S/` ("con negro"); OJO: los nombres de archivo adentro pueden estar mal etiquetados, la carpeta es lo que vale.
+   - **Medidas:** ciclo de 5 fotos oficiales (renders satinados fondo negro, `model-620/640/660/670/671.jpg`, 3072px) + pills **640 → 620 → 660 → 670 → 671** (siempre de la más chica a la más grande; OJO: la 620 es MÁS GRANDE que la 640 — el orden por tamaño NO es el numérico, se midió en los renders). Fuente: carpetas `Downloads/<modelo>S/` ("con negro"); OJO: los nombres de archivo adentro pueden estar mal etiquetados, la carpeta es lo que vale.
    - **Instalación:** pills (Enrasada / Bajo mesada / Sobre mesada) + placeholder de imagen.
 6. **Accesorios** — "Todo lo que necesitás, incluido" + 4 cards con fotos **transparentes**:
    Barra escurridora (`acc-barra.png`), Tabla de vidrio (`acc-tabla.png`), Dosificador (`acc-dosificador.png`), Cesto escurridor (`acc-cesto.png`) + botón Comprar en Mercado Libre.
