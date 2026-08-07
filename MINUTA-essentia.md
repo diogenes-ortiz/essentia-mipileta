@@ -16,7 +16,7 @@ Partió como réplica del template **Signature Series de Johnson Acero** y se ad
 
 ## Diseño / estilo
 - Fondo negro, texto blanco. Fuentes: **Hanken Grotesk** (cuerpo) + **Raleway** (hero).
-- Botones **gris metálico** (`.btn-metal`). Se eliminó todo el verde agua del sitio.
+- Botones **pill blanco y negro**: `.btn-metal` (el nombre quedó por herencia) = pill blanca con texto negro, hover a gris `#c2c8ce`; `.btn-outline` = pill sin fondo con borde, hover invierte a fondo blanco + texto negro. Se eliminó el gradiente metálico y todo el verde agua del sitio.
 - Mobile optimizado (media queries ≤640 / ≤380 / ≤700 px).
 
 ## Secciones (en orden)
@@ -26,8 +26,7 @@ Partió como réplica del template **Signature Series de Johnson Acero** y se ad
    - El "Essentia" es el **wordmark oficial** `assets/essentia-wordmark.png` (4402x827, blanco transparente, sacado del vectorial `Downloads/essentia palabra.ai` pág. 13) usado como **máscara CSS** sobre el gradiente acero → letras oficiales + acabado metálico. `.hero-title` es un div con mask-image; oculto en mobile.
    - Mobile: `essentia-hero-mobile.png` (vertical, todavía con texto incrustado).
 3. **"Diseño puro, funcionalidad absoluta"** + **modelo 3D** (`model-viewer`, `670_Gris.glb`) que **rota + hace zoom con el scroll** (camera-orbit 115%→100%, gira ±30°; el radio ≥100% evita que se corten los bordes).
-4. **"La familia Essentia completa"** — video full-width, sin marco:
-   - Desktop: `familia-essentia.mp4`. Mobile: `familia-mobile.mp4` (H.264 540×960).
+4. **"La familia Essentia completa"** — banner FOTO full-width (`familia-essentia.png`, 1783x882: toda la línea con la cobre al centro), con el **título adentro de la foto** (`.familia-title`, top 8%) y el isologo chiquito arriba-izq. Sin crossfade (se probó alternar con `familia-foto.png` y el usuario lo descartó). Los videos `familia-*.mp4` ya no se usan.
 5. **"Conocé cada detalle"** — barra de **2 opciones** (Modelos y colores · Modos de instalación), el panel se despliega debajo:
    - **Modelos y colores (fusionados):** pills de modelo **640 → 620 → 660 → 670 → 671** (siempre de la más chica a la más grande; OJO: la 620 es MÁS GRANDE que la 640 — el orden por tamaño NO es el numérico, se midió en los renders) + swatches de terminación que muestran SOLO los colores disponibles del modelo elegido: 620=S; 640/670/671=S+B; 660=S+B+R (S=satinado, B=negro grafito, R=cobre). Fotos `model-<n>.jpg` (satinadas) y `model-<n>B/R.jpg` en assets, todas renders "con negro" 3072px. Al cambiar a un modelo sin el color elegido, cae a satinado. Ciclo automático por modelos (satinado) hasta que el usuario clickea. Los viejos `color-gris/negra.png` del tab Colores ya no se usan.
    - **Instalación:** pills (Enrasada / Bajo mesada / Sobre mesada) + placeholder de imagen.
