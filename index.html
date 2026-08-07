@@ -377,26 +377,22 @@
     display:inline-block;padding:14px 30px;border-radius:7px;font-weight:700;
     cursor:pointer;font-family:inherit;border:0;font-size:.95rem;
   }
+  /* filled: pill blanca con texto negro (mismo estilo que "Dónde comprar"); hover a gris */
   .btn-metal{
-    color:#f4f6f9;
-    background:linear-gradient(180deg,#565c66 0%,#3c4148 52%,#2a2e34 100%);
-    border:1px solid rgba(255,255,255,.16);
-    border-radius:11px;
+    color:#14181e;
+    background:#fff;
+    border:1px solid #fff;
+    border-radius:99px;
     letter-spacing:.01em;
-    text-shadow:0 1px 1px rgba(0,0,0,.45);
-    box-shadow:inset 0 1px 0 rgba(255,255,255,.22), inset 0 -1px 1px rgba(0,0,0,.3), 0 6px 18px rgba(0,0,0,.45);
-    transition:filter .2s, transform .15s, box-shadow .2s;
+    transition:background .25s ease, border-color .25s ease;
   }
-  .btn-metal:hover{
-    filter:brightness(1.12);transform:translateY(-1px);
-    box-shadow:inset 0 1px 0 rgba(255,255,255,.28), 0 8px 22px rgba(0,0,0,.5);
-  }
+  .btn-metal:hover{background:#c2c8ce;border-color:#c2c8ce;}
   .cta-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:30px;}
   .btn-outline{
     background:none;border:1px solid rgba(255,255,255,.45);color:#e9ecef;border-radius:99px;
-    transition:border-color .2s, background .2s;
+    transition:border-color .2s, background .2s, color .2s;
   }
-  .btn-outline:hover{border-color:#fff;background:rgba(255,255,255,.06);}
+  .btn-outline:hover{border-color:#fff;background:#fff;color:#14181e;}
 
   /* warranty block */
   .warranty{display:flex;gap:40px;align-items:center;justify-content:center;flex-wrap:wrap;}
@@ -637,7 +633,6 @@
     <div class="familia-banner">
       <h2 class="intro-h2 familia-title">La familia Essentia<br><strong>completa</strong></h2>
       <img class="familia-frame active" src="assets/familia-essentia.png" alt="La familia Essentia completa">
-      <img class="familia-frame" src="assets/familia-foto.png" alt="Essentia en uso">
       <img class="familia-logo" src="assets/mp-sintesis.png" alt="Mi Pileta">
     </div>
 
@@ -1064,23 +1059,6 @@
     }); });
     setInterval(function(){ if(!locked){ i = (i+1) % ORDEN.length; model = ORDEN[i]; finish = 'S'; render(); } }, 5000);
     render();
-  })();
-
-  // banner familia: alterna lento entre el banner principal y la foto en uso
-  (function(){
-    var banner = document.querySelector('.familia-banner');
-    if(!banner) return;
-    var frames = banner.querySelectorAll('.familia-frame');
-    if(frames.length < 2) return;
-    var i = 0;
-    setInterval(function(){
-      var saliente = frames[i];
-      i = (i + 1) % frames.length;
-      var entrante = frames[i];
-      saliente.classList.remove('active'); saliente.classList.add('prev');
-      entrante.classList.add('active');
-      setTimeout(function(){ saliente.classList.remove('prev'); }, 1300);
-    }, 7000);
   })();
 
   // Conocé cada detalle — selector vertical: cambia panel de texto + foto
