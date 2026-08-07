@@ -377,16 +377,17 @@
     display:inline-block;padding:14px 30px;border-radius:7px;font-weight:700;
     cursor:pointer;font-family:inherit;border:0;font-size:.95rem;
   }
-  /* filled: pill blanca con texto negro (mismo estilo que "Dónde comprar"); hover a gris */
+  /* filled: pill blanca con texto negro; hover invierte a outline con texto blanco
+     (el efecto espejo del .btn-outline, que va de outline a blanco) */
   .btn-metal{
     color:#14181e;
     background:#fff;
     border:1px solid #fff;
     border-radius:99px;
     letter-spacing:.01em;
-    transition:background .25s ease, border-color .25s ease;
+    transition:background .25s ease, border-color .25s ease, color .25s ease;
   }
-  .btn-metal:hover{background:#c2c8ce;border-color:#c2c8ce;}
+  .btn-metal:hover{background:transparent;border-color:#fff;color:#fff;}
   .cta-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:30px;}
   .btn-outline{
     background:none;border:1px solid rgba(255,255,255,.45);color:#e9ecef;border-radius:99px;
