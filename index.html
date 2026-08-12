@@ -363,7 +363,9 @@
   /* ---------- accessory cards ---------- */
   .acc-cards{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;margin-top:36px;}
   @media(max-width:900px){.acc-cards{grid-template-columns:repeat(2,1fr);}
-    .acc-cards .product:nth-child(5){grid-column:1 / -1;}}
+    .acc-cards .product:nth-child(5){grid-column:1 / -1;}
+    /* la 5ta ocupa la fila entera: imagen apaisada para que no quede gigante */
+    .acc-cards .product:nth-child(5) .acc-img{aspect-ratio:2/1;}}
   @media(max-width:520px){.acc-cards{grid-template-columns:1fr;}}
   .product{background:var(--card);border-radius:var(--radius);padding:18px;border:1px solid #161616;overflow:hidden;}
   /* tabla de vidrio: la foto viene recortada por el lado derecho, así que sangra
@@ -718,7 +720,7 @@
       <div class="product">
         <div class="acc-img"><img src="assets/acc-rejilla.png" alt="Rejilla flexible"></div>
         <h3>Rejilla flexible</h3>
-        <p>Se enrolla y se adapta sobre la pileta: apoyo firme para escurrir y secar, y se guarda en un cajón.</p>
+        <p>Se enrolla sobre la pileta para escurrir y secar, y se guarda en un cajón.</p>
       </div>
     </div>
 
