@@ -361,8 +361,9 @@
   .pill.sel{background:#e9ecef;color:#14181e;border-color:#e9ecef;}
 
   /* ---------- accessory cards ---------- */
-  .acc-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:36px;}
-  @media(max-width:900px){.acc-cards{grid-template-columns:repeat(2,1fr);}}
+  .acc-cards{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;margin-top:36px;}
+  @media(max-width:900px){.acc-cards{grid-template-columns:repeat(2,1fr);}
+    .acc-cards .product:nth-child(5){grid-column:1 / -1;}}
   @media(max-width:520px){.acc-cards{grid-template-columns:1fr;}}
   .product{background:var(--card);border-radius:var(--radius);padding:18px;border:1px solid #161616;overflow:hidden;}
   /* tabla de vidrio: la foto viene recortada por el lado derecho, así que sangra
@@ -713,6 +714,11 @@
         <div class="acc-img"><img src="assets/acc-cesto.png" alt="Cesto escurridor"></div>
         <h3>Cesto escurridor</h3>
         <p>Cesto práctico para escurrir y secar utensilios, manteniendo cada cosa en su lugar.</p>
+      </div>
+      <div class="product">
+        <div class="acc-img"><img src="assets/acc-rejilla.png" alt="Rejilla flexible"></div>
+        <h3>Rejilla flexible</h3>
+        <p>Se enrolla y se adapta sobre la pileta: apoyo firme para escurrir y secar, y se guarda en un cajón.</p>
       </div>
     </div>
 
