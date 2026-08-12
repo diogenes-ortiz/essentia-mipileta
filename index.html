@@ -649,10 +649,9 @@
       </div>
       <div class="tabs3-panels">
         <div class="t3-panel active" data-t3="modelos">
-          <p>Cinco modelos —640, 620, 660, 670 y 671— y hasta tres terminaciones según el modelo: satinado, negro grafito y cobre.</p>
+          <p>Cuatro modelos —640, 660, 670 y 671— y hasta tres terminaciones según el modelo: satinado, negro grafito y cobre.</p>
           <div class="swatches" data-model-pills>
             <button class="pill" data-model="640">640</button>
-            <button class="pill" data-model="620">620</button>
             <button class="pill" data-model="660">660</button>
             <button class="pill" data-model="670">670</button>
             <button class="pill" data-model="671">671</button>
@@ -666,7 +665,6 @@
           <div class="color-media" id="modelos-media">
             <img class="color-frame active" data-key="640S" src="assets/model-640.jpg" alt="Essentia 640 satinada">
             <img class="color-frame" data-key="640B" src="assets/model-640B.jpg" alt="Essentia 640 negra">
-            <img class="color-frame" data-key="620S" src="assets/model-620.jpg" alt="Essentia 620 satinada">
             <img class="color-frame" data-key="660S" src="assets/model-660.jpg" alt="Essentia 660 satinada">
             <img class="color-frame" data-key="660B" src="assets/model-660B.jpg" alt="Essentia 660 negra">
             <img class="color-frame" data-key="660R" src="assets/model-660R.jpg" alt="Essentia 660 cobre">
@@ -1034,8 +1032,8 @@
     var frames = media.querySelectorAll('.color-frame');
     var pills = document.querySelectorAll('[data-model-pills] [data-model]');
     var sw = document.querySelectorAll('[data-finish-swatches] [data-finish]');
-    var FIN = {'620':['S'],'640':['S','B'],'660':['S','B','R'],'670':['S','B'],'671':['S','B']};
-    var ORDEN = ['640','620','660','670','671'];
+    var FIN = {'640':['S','B'],'660':['S','B','R'],'670':['S','B'],'671':['S','B']};
+    var ORDEN = ['640','660','670','671'];
     var model = '640', finish = 'S', locked = false, i = 0;
     function render(){
       var saliente = media.querySelector('.color-frame.active');
