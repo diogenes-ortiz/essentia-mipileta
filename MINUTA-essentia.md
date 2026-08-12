@@ -22,7 +22,7 @@ Partió como réplica del template **Signature Series de Johnson Acero** y se ad
 ## Secciones (en orden)
 1. **Nav superior** (sticky negro): logo a la izquierda (48px desktop / 40 mobile), links **Concepto · Modelos · Contacto**. En **mobile = menú hamburguesa**.
 2. **Hero ESSENTIA** (banner full-width):
-   - Desktop: `essentia-hero.png` (horizontal, solo las 2 piletas, sin texto).
+   - Desktop: `essentia-hero-trio.png` (1672x941, las 3 terminaciones con la cobre al centro, `background-position:center top` para que las piletas queden abajo). La anterior (`essentia-hero.png`, 2 piletas) sigue en assets por si se vuelve. PENDIENTE: conseguir versión en alta (ideal 3344x1630 JPG/WebP ~2:1, piletas abajo y tercio superior negro) — la actual es de ChatGPT (~1672px máx) y se ablanda en 2K/4K.
    - El "Essentia" es el **wordmark oficial** `assets/essentia-wordmark.png` (4402x827, blanco transparente, sacado del vectorial `Downloads/essentia palabra.ai` pág. 13) usado como **máscara CSS** sobre el gradiente acero → letras oficiales + acabado metálico. `.hero-title` es un div con mask-image; oculto en mobile.
    - Mobile: `essentia-hero-mobile.png` (vertical, todavía con texto incrustado).
 3. **"Diseño puro, funcionalidad absoluta"** + **modelo 3D** (`model-viewer`, `670_Gris.glb`) que **rota + hace zoom con el scroll** (camera-orbit 115%→100%, gira ±30°; el radio ≥100% evita que se corten los bordes).
