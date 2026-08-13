@@ -7,7 +7,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;700&family=Raleway:wght@300;400;700&display=swap" rel="stylesheet">
-<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 <style>
   :root{
     --bg:#000;
@@ -147,11 +146,11 @@
     .fam-mobile{display:block;}
   }
 
-  /* ---------- 3D sobre el fondo (sin caja) ---------- */
+  /* ---------- video de producto sobre el fondo (sin caja; antes era el 3D) ---------- */
   .hero-3d{position:relative;}
   .model3d{
     width:100%;height:76vh;min-height:460px;background:transparent;display:block;
-    margin-top:70px;outline:none;--poster-color:transparent;
+    margin-top:70px;outline:none;object-fit:contain;
   }
   .hero .caption h1{
     font-family:"Raleway",sans-serif;font-weight:700;
@@ -618,21 +617,12 @@
     <div class="container" style="padding-top:60px;">
       <h2 class="intro-h2">Diseño puro,<br><strong>funcionalidad absoluta</strong></h2>
     </div>
-    <model-viewer
-      id="essentia-3d"
+    <video
+      id="essentia-video"
       class="model3d"
-      src="assets/670_Gris.glb"
-      alt="Pileta Essentia 670"
-      camera-orbit="0deg 32deg 115%"
-      field-of-view="30deg"
-      interpolation-decay="220"
-      environment-image="neutral"
-      exposure="1.7"
-      tone-mapping="aces"
-      shadow-intensity="0"
-      interaction-prompt="none"
-      disable-zoom disable-pan disable-tap
-      loading="eager"></model-viewer>
+      src="assets/video-essentia.mp4"
+      autoplay muted loop playsinline
+      aria-label="Pileta Essentia en video"></video>
   </div>
 
   <!-- la familia signature -->
@@ -920,28 +910,6 @@
     });
   })();
 
-  // 3D Essentia: rota según el scroll (entra hacia un lado, sale hacia el otro)
-  (function(){
-    var mv = document.getElementById('essentia-3d');
-    var stage = document.getElementById('hero-3d');
-    if(!mv || !stage) return;
-    var ticking = false;
-    function update(){
-      var rect = stage.getBoundingClientRect();
-      var vh = window.innerHeight || document.documentElement.clientHeight;
-      var total = rect.height + vh;
-      var p = (vh - rect.top) / total;       // 0 al entrar, 1 al salir
-      p = Math.max(0, Math.min(1, p));
-      var theta = -30 + p * 60;              // gira de -30° a +30° (centrado de frente)
-      var radius = 115 - p * 15;             // zoom suave 115% -> 100% (sin cortar los bordes)
-      mv.cameraOrbit = theta + 'deg 32deg ' + radius + '%';
-      ticking = false;
-    }
-    function onScroll(){ if(!ticking){ ticking = true; requestAnimationFrame(update); } }
-    window.addEventListener('scroll', onScroll, {passive:true});
-    window.addEventListener('resize', onScroll);
-    update();
-  })();
 
   // hero banner crossfade (fairly fast)
   (function(){
