@@ -645,7 +645,7 @@
       </div>
       <div class="tabs3-panels">
         <div class="t3-panel active" data-t3="modelos">
-          <p>Cuatro modelos —640, 660, 670 y 671— y hasta tres terminaciones según el modelo: satinado, negro grafito y cobre.</p>
+          <p>Cuatro modelos —640, 660, 670 y 671— y hasta tres terminaciones según el modelo: satinado, negro grafito y rose.</p>
           <div class="swatches" data-model-pills>
             <button class="pill" data-model="640">640</button>
             <button class="pill" data-model="660">660</button>
@@ -656,14 +656,14 @@
           <div class="swatches" data-finish-swatches>
             <button class="swatch steel" data-finish="S" title="Satinado"></button>
             <button class="swatch black" data-finish="B" title="Negro grafito"></button>
-            <button class="swatch rose" data-finish="R" title="Cobre"></button>
+            <button class="swatch rose" data-finish="R" title="Rose"></button>
           </div>
           <div class="color-media" id="modelos-media">
             <img class="color-frame active" data-key="640S" src="assets/model-640.jpg" alt="Essentia 640 satinada">
             <img class="color-frame" data-key="640B" src="assets/model-640B.jpg" alt="Essentia 640 negra">
             <img class="color-frame" data-key="660S" src="assets/model-660.jpg" alt="Essentia 660 satinada">
             <img class="color-frame" data-key="660B" src="assets/model-660B.jpg" alt="Essentia 660 negra">
-            <img class="color-frame" data-key="660R" src="assets/model-660R.jpg" alt="Essentia 660 cobre">
+            <img class="color-frame" data-key="660R" src="assets/model-660R.jpg" alt="Essentia 660 rose">
             <img class="color-frame" data-key="670S" src="assets/model-670.jpg" alt="Essentia 670 satinada">
             <img class="color-frame" data-key="670B" src="assets/model-670B.jpg" alt="Essentia 670 negra">
             <img class="color-frame" data-key="671S" src="assets/model-671.jpg" alt="Essentia 671 satinada">
@@ -1013,7 +1013,13 @@
     var sw = document.querySelectorAll('[data-finish-swatches] [data-finish]');
     var FIN = {'640':['S','B'],'660':['S','B','R'],'670':['S','B'],'671':['S','B']};
     var ORDEN = ['640','660','670','671'];
-    var model = '640', finish = 'S', locked = false, i = 0;
+    // secuencia de animación: recorre cada modelo pasando por TODOS sus colores,
+    // recién después salta al siguiente modelo
+    var SEQ = [];
+    ORDEN.forEach(function(m){ FIN[m].forEach(function(f){ SEQ.push([m, f]); }); });
+    // arranca en la 660 rose (la predeterminada)
+    var model = '660', finish = 'R', locked = false, i = 0;
+    SEQ.forEach(function(p, k){ if(p[0] === '660' && p[1] === 'R') i = k; });
     function render(){
       var saliente = media.querySelector('.color-frame.active');
       frames.forEach(function(f){ f.classList.toggle('active', f.getAttribute('data-key') === model + finish); });
@@ -1031,13 +1037,15 @@
     }
     pills.forEach(function(b){ b.addEventListener('click', function(){
       locked = true; model = b.getAttribute('data-model');
-      if(FIN[model].indexOf(finish) === -1) finish = 'S';
+      // rose es la predeterminada si el modelo la tiene; si no, mantiene el color o cae a satinado
+      if(FIN[model].indexOf('R') !== -1) finish = 'R';
+      else if(FIN[model].indexOf(finish) === -1) finish = 'S';
       render();
     }); });
     sw.forEach(function(b){ b.addEventListener('click', function(){
       locked = true; finish = b.getAttribute('data-finish'); render();
     }); });
-    setInterval(function(){ if(!locked){ i = (i+1) % ORDEN.length; model = ORDEN[i]; finish = 'S'; render(); } }, 5000);
+    setInterval(function(){ if(!locked){ i = (i+1) % SEQ.length; model = SEQ[i][0]; finish = SEQ[i][1]; render(); } }, 4000);
     render();
   })();
 
