@@ -23,10 +23,13 @@
   }
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
+  /* el recorte horizontal va SOLO en html: si el body también lo lleva, su overflow-y
+     pasa a 'auto' y aparece una SEGUNDA barra de scroll. 'clip' recorta sin crear
+     contenedor de scroll (hidden queda de fallback para navegadores viejos). */
   html{overflow-x:hidden;}
+  html{overflow-x:clip;}
   body{
     margin:0;
-    overflow-x:hidden;
     background:var(--bg);
     color:var(--txt);
     font-family:"Hanken Grotesk",system-ui,Arial,sans-serif;
