@@ -39,7 +39,7 @@ Partió como réplica del template **Signature Series de Johnson Acero** y se ad
 
 ## Pendientes / TODO
 - [ ] **Comprimir**: `video-essentia.mp4` (~20 MB, en uso) y `catalogo-essentia.pdf` (17,8 MB) para que carguen más rápido en celular.
-- [ ] **Número de WhatsApp** de Mi Pileta para activar el botón flotante (`WA_NUMERO`, hoy vacío = botón oculto).
+
 - [ ] **Distribuidores reales** del mapa por zona (hoy son datos de ejemplo). Opcional: Google Maps real (necesita API key).
 - [ ] Reemplazar el **placeholder de imagen de "Modos de instalación"** (Conocé cada detalle) y videos que sigan como placeholder.
 - [ ] Definir si Accesorios lleva **1 o 2 fotos por card** (hoy 1; la idea original era satinada + black).
@@ -48,7 +48,7 @@ Partió como réplica del template **Signature Series de Johnson Acero** y se ad
 - **Padding de títulos:** `.section` usa `padding-block` (no `padding` shorthand) para no pisar el padding horizontal de `.container`. Si se vuelve a `padding: X 0`, los títulos tocan los bordes.
 - **Medidas:** el mapeo es directo (data-model 640 → `model-640.jpg`, etc.) con las fotos oficiales; el viejo cruce 660/670 de los `.png` ya no aplica.
 - **Master de video:** el `.mov` original está en **ProRes** → NO reproduce en navegadores; siempre usar export **H.264 .mp4**.
-- **Botones flotantes** (z-index 900, bajo el gate 9999): `.float-cat` = pill blanca centrada abajo que descarga `assets/catalogo-essentia.pdf` (17,8 MB, el PDF oficial "ESSENTIA diseño puro funcionalidad absoluta"); `.float-wsp` = burbuja verde abajo a la derecha, **oculta hasta cargar el número** en la constante `WA_NUMERO` del script al final del body (nunca inventar un número).
+- **Botones flotantes** (z-index 900, bajo el gate 9999): `.float-cat` = pill blanca centrada abajo que descarga `assets/catalogo-essentia.pdf` (17,8 MB, el PDF oficial "ESSENTIA diseño puro funcionalidad absoluta"); `.float-wsp` = burbuja outline (44px, ícono blanco) abajo a la derecha con el número **5491128563001**, configurado en la constante `WA_NUMERO` del script al final del body (si se vacía, el botón se oculta solo; nunca inventar un número). Ambos flotantes comparten el mismo estilo: vidrio oscuro + borde blanco, hover invierte a blanco lleno.
 
 ## Cómo pedir cambios en la próxima sesión
 Mencionar que el proyecto es el HTML `signature-series.html` en `Downloads/Cloud`, con esta minuta como referencia.
