@@ -347,27 +347,32 @@
   .swatch.steel{background:linear-gradient(135deg,#d8d8d8,#9a9a9a);}
   .swatch.goldblack{background:linear-gradient(135deg,#e6c79a,#1a1a1a);}
   /* ---------- botones flotantes (z-index < 9999 del gate) ---------- */
+  /* mismo lenguaje que el botón de catálogo: outline claro sobre vidrio oscuro */
   .float-wsp{
     position:fixed;right:22px;bottom:22px;z-index:900;
-    width:56px;height:56px;border-radius:50%;background:#25D366;
+    width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,.35);
+    border:1px solid rgba(255,255,255,.45);backdrop-filter:blur(6px);
     display:flex;align-items:center;justify-content:center;
-    box-shadow:0 6px 20px rgba(0,0,0,.45);transition:transform .25s ease;
+    box-shadow:0 6px 20px rgba(0,0,0,.45);
+    transition:background .25s ease, border-color .25s ease;
   }
-  .float-wsp:hover{transform:scale(1.07);}
-  .float-wsp svg{width:30px;height:30px;fill:#fff;}
+  .float-wsp svg{width:21px;height:21px;fill:#e9ecef;transition:fill .25s ease;}
+  .float-wsp:hover{background:#fff;border-color:#fff;}
+  .float-wsp:hover svg{fill:#14181e;}
+  /* outline por defecto; al apoyar el mouse se rellena en blanco (como .btn-outline) */
   .float-cat{
     position:fixed;left:50%;transform:translateX(-50%);bottom:22px;z-index:900;
-    padding:13px 26px;border-radius:99px;background:#fff;color:#14181e;
+    padding:13px 26px;border-radius:99px;background:rgba(0,0,0,.35);color:#e9ecef;
     font-size:.85rem;font-weight:700;white-space:nowrap;text-decoration:none;
-    box-shadow:0 6px 20px rgba(0,0,0,.45);
+    backdrop-filter:blur(6px);box-shadow:0 6px 20px rgba(0,0,0,.45);
     transition:background .25s ease, border-color .25s ease, color .25s ease;
-    border:1px solid #fff;
+    border:1px solid rgba(255,255,255,.45);
   }
-  .float-cat:hover{background:transparent;border-color:#fff;color:#fff;}
+  .float-cat:hover{background:#fff;border-color:#fff;color:#14181e;}
   @media(max-width:640px){
-    .float-wsp{width:50px;height:50px;right:14px;bottom:14px;}
-    .float-wsp svg{width:26px;height:26px;}
-    .float-cat{bottom:16px;padding:11px 18px;font-size:.78rem;left:calc(50% - 34px);}
+    .float-wsp{width:40px;height:40px;right:14px;bottom:14px;}
+    .float-wsp svg{width:19px;height:19px;}
+    .float-cat{bottom:16px;padding:11px 18px;font-size:.78rem;left:calc(50% - 28px);}
   }
 
   /* indicador de medida (largo × ancho) que acompaña al modelo seleccionado */
@@ -1164,8 +1169,8 @@
   // WhatsApp: completar con el número real en formato internacional sin + ni espacios
   // (ej. Argentina: 549 + característica sin 0 + número sin 15). Vacío = botón oculto.
   (function(){
-    var WA_NUMERO = '';
-    var WA_TEXTO  = 'Hola, quiero información sobre las piletas Essentia';
+    var WA_NUMERO = '5491128563001';
+    var WA_TEXTO  = '¡Hola! Tengo una pregunta sobre una pileta';
     var btn = document.getElementById('float-wsp');
     if(!btn || !WA_NUMERO) return;
     btn.href = 'https://wa.me/' + WA_NUMERO + '?text=' + encodeURIComponent(WA_TEXTO);
