@@ -542,10 +542,11 @@
     .eyebrow{font-size:.8rem;letter-spacing:.18em;}
     .lead{font-size:.95rem;}
 
-    /* hero banner vertical solo en mobile */
-    .hero{aspect-ratio:887/1774;margin-top:0;}
-    .hero::before{background-image:url('assets/essentia-hero-mobile.png?v=2');}
-    .hero-title{display:none;}
+    /* mobile: la MISMA foto y el MISMO wordmark que desktop (la vertical vieja traía
+       el texto incrustado en baja calidad). El 4/5 deja entrar la cuba cobre entera. */
+    .hero{aspect-ratio:4/5;margin-top:0;}
+    .hero::before{background-position:center;}
+    .hero-title{display:block;width:min(64vw,320px);top:6%;}
 
     /* hero 3D más compacto, no domina la pantalla */
     .hero-3d .container{padding-top:36px;}
@@ -1184,12 +1185,27 @@
       probe.remove();
       de.style.setProperty('--fixoff', (de.clientWidth / 2 - real).toFixed(2) + 'px');
     }
-    medir();
-    addEventListener('resize', medir);
-    addEventListener('load', medir);
+    /* Alinea el botón de catálogo con el desagüe de la pileta central.
+       Se calcula sobre el render real del background (cover + center), así queda
+       clavado aunque la foto se recorte en mobile o cambie la barra de scroll. */
+    var FOTO_W = 1672, FOTO_H = 941, TAPON_X = 833.5; // medidos sobre essentia-hero-trio.png
+    function alinearBoton(){
+      var hero = document.getElementById('hero');
+      var btn = document.querySelector('.float-cat');
+      if(!hero || !btn) return;
+      var r = hero.getBoundingClientRect();
+      if(!r.width) return;
+      var escala = Math.max(r.width / FOTO_W, r.height / FOTO_H);   // background-size:cover
+      var origenX = r.left + (r.width - FOTO_W * escala) / 2;        // background-position:center
+      btn.style.left = (origenX + TAPON_X * escala).toFixed(1) + 'px';
+    }
+    function todo(){ medir(); alinearBoton(); }
+    todo();
+    addEventListener('resize', todo);
+    addEventListener('load', todo);
     /* el resize no siempre dispara (p. ej. cuando aparece o desaparece la barra de
        scroll por cambio de contenido): el observer cubre esos casos */
-    if(window.ResizeObserver) new ResizeObserver(medir).observe(de);
+    if(window.ResizeObserver) new ResizeObserver(todo).observe(de);
   })();
 </script>
 
