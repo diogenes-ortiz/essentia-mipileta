@@ -109,7 +109,9 @@
   .hero::before{
     content:"";position:absolute;inset:0;z-index:0;
     background-image:url('assets/essentia-hero-trio.png');
-    background-size:cover;background-position:center top;background-repeat:no-repeat;
+    /* el % vertical sube apenas la foto para acercar las piletas al wordmark
+       (con 'top' quedaban ~80px por debajo; con 20% quedan ~62px) */
+    background-size:cover;background-position:center 20%;background-repeat:no-repeat;
   }
   /* wordmark oficial "Essentia" (assets/essentia-wordmark.png, 4402x827) usado como
      máscara sobre el gradiente acero: letras oficiales + acabado metálico, vector-crisp */
