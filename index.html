@@ -378,9 +378,13 @@
   }
   .float-cat:hover{background:#fff;border-color:#fff;color:#14181e;}
   @media(max-width:640px){
-    .float-wsp{width:40px;height:40px;right:14px;bottom:14px;}
-    .float-wsp svg{width:19px;height:19px;}
-    .float-cat{bottom:16px;padding:11px 18px;font-size:.78rem;left:calc(50% - 28px);}
+    /* en celular la barra inferior del navegador / los gestos del sistema tapan lo
+       que esté pegado al borde: env(safe-area-inset-bottom) lo levanta lo justo */
+    .float-wsp{width:44px;height:44px;right:14px;
+      bottom:calc(18px + env(safe-area-inset-bottom, 0px));}
+    .float-wsp svg{width:21px;height:21px;}
+    .float-cat{padding:12px 20px;font-size:.8rem;left:calc(50% - 30px);
+      bottom:calc(18px + env(safe-area-inset-bottom, 0px));}
   }
 
   /* indicador de medida (largo × ancho) que acompaña al modelo seleccionado */
@@ -702,6 +706,7 @@
             <button class="pill" data-model="670">670</button>
             <button class="pill" data-model="671">671</button>
           </div>
+          <p class="model-size" data-model-size></p>
           <div class="modelos-row">
           <div class="swatches" data-finish-swatches>
             <button class="swatch steel" data-finish="S" title="Satinado"></button>
@@ -722,7 +727,6 @@
           </div>
           </div>
           </div>
-          <p class="model-size" data-model-size></p>
         </div>
         <div class="t3-panel" data-t3="instalacion">
           <p>Tres opciones diferentes para una integración perfecta con cada estilo.</p>
