@@ -397,6 +397,27 @@
   }
   .t3-panel .model-size strong{color:#e9ecef;font-weight:500;letter-spacing:.08em;}
 
+
+  /* comentario minimalista bajo las piletas: shimmer lento sobre el texto */
+  /* calificado con .t3-panel: si no, .t3-panel p le pisa el margen (misma trampa
+     que el indicador de medida) */
+  .t3-panel .pvd-note{
+    display:flex;align-items:center;justify-content:center;gap:10px;
+    margin:26px auto 0;font-size:.8rem;font-weight:300;letter-spacing:.06em;
+  }
+  .pvd-note span{
+    background:linear-gradient(90deg,#6d737b 0%,#6d737b 38%,#f2f5f8 50%,#6d737b 62%,#6d737b 100%);
+    background-size:260% 100%;
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    animation:pvd-shimmer 7s linear infinite;
+  }
+  .pvd-note::before,.pvd-note::after{
+    content:'';height:1px;width:clamp(18px,5vw,46px);flex:none;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.35));
+  }
+  .pvd-note::after{background:linear-gradient(90deg,rgba(255,255,255,.35),transparent);}
+  @keyframes pvd-shimmer{from{background-position:130% 0;}to{background-position:-30% 0;}}
+
   /* terminaciones del panel Modelos y colores: columna vertical a la DERECHA,
      por fuera de la foto (así nunca toca la pileta, ni con la 671), centrada a su altura */
   .modelos-row{display:flex;align-items:center;justify-content:center;gap:24px;margin-top:14px;}
@@ -530,6 +551,7 @@
   @media (prefers-reduced-motion: reduce){
     html.js .topbar,html.js .hero::before,html.js .hero-title{animation:none;}
     html.js .ess-reveal{opacity:1;transform:none;transition:none;}
+    .pvd-note span{animation:none;}
   }
 
   /* footer */
@@ -727,6 +749,7 @@
           </div>
           </div>
           </div>
+          <p class="pvd-note"><span>Tratamiento de PDB para garantizar el color para toda la vida</span></p>
         </div>
         <div class="t3-panel" data-t3="instalacion">
           <p>Tres opciones diferentes para una integración perfecta con cada estilo.</p>
@@ -1162,7 +1185,7 @@
 <script>
   // Revelado suave de secciones al entrar en pantalla
   (function(){
-    var targets = document.querySelectorAll('.section:not(#signature), .foot');
+    var targets = document.querySelectorAll('.section:not(#signature), .foot, .pvd-note');
     targets.forEach(function(el){ el.classList.add('ess-reveal'); });
     if(!('IntersectionObserver' in window)){
       targets.forEach(function(el){ el.classList.add('in-view'); });
