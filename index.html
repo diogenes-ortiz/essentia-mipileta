@@ -23,6 +23,8 @@
   }
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
+  /* el nav es sticky: sin este margen, al saltar a un ancla el titulo queda debajo */
+  #signature,#griferias-glow,#donde-comprar,#compra-segura{scroll-margin-top:88px;}
   /* el recorte horizontal va SOLO en html: si el body también lo lleva, su overflow-y
      pasa a 'auto' y aparece una SEGUNDA barra de scroll. 'clip' recorta sin crear
      contenedor de scroll (hidden queda de fallback para navegadores viejos). */
@@ -705,6 +707,7 @@
     <nav id="topnav">
       <a href="#signature">Concepto</a>
       <a href="#griferias-glow">Modelos</a>
+      <a href="#compra-segura">Compra segura</a>
       <a href="#donde-comprar">Contacto</a>
     </nav>
   </div>
@@ -962,7 +965,7 @@
 </section>
 
 <!-- ================= CTA FINAL ================= -->
-<section class="section">
+<section class="section" id="compra-segura">
   <div class="container" style="text-align:center;">
     <div style="display:inline-block;max-width:520px;">
       <h2 class="intro-h2">Compra <strong>segura</strong></h2>
