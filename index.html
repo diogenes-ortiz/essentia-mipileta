@@ -398,6 +398,32 @@
   .t3-panel .model-size strong{color:#e9ecef;font-weight:500;letter-spacing:.08em;}
 
 
+
+  /* ---------- esquema de instalación (SVG en corte) ---------- */
+  .inst-scheme{max-width:560px;margin:26px auto 0;}
+  .inst-scheme svg{width:100%;height:auto;display:block;overflow:visible;}
+  /* cada variante se cruza con la anterior: fundido + leve desplazamiento */
+  .inst-fig{opacity:0;transform:translateY(10px);transform-origin:50% 60%;
+    transition:opacity .55s cubic-bezier(.4,0,.2,1), transform .55s cubic-bezier(.4,0,.2,1);}
+  .inst-fig.on{opacity:1;transform:none;}
+  .inst-fig:not(.on){pointer-events:none;}
+  /* la mesada: tramada y en gris, bien distinta del acero de la pileta */
+  .inst-fig .mesada{fill:url(#mesada-tramado);stroke:#9aa1aa;stroke-width:1.5;}
+  .inst-fig .cuba-fondo{fill:#0b0b0b;}
+  .inst-fig .cuba{fill:none;stroke:url(#acero);stroke-width:6;
+    stroke-linejoin:round;stroke-linecap:round;
+    filter:drop-shadow(0 2px 6px rgba(0,0,0,.55));}
+  .inst-fig .ras{stroke:rgba(255,255,255,.28);stroke-width:1;stroke-dasharray:5 6;}
+  .inst-legend{display:flex;gap:22px;justify-content:center;margin-top:14px;
+    font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);}
+  .inst-legend span{display:inline-flex;align-items:center;gap:7px;}
+  .inst-legend i{width:16px;height:9px;border-radius:2px;display:inline-block;}
+  .inst-legend .lg-mesada{background:repeating-linear-gradient(45deg,#7d858f 0 2px,transparent 2px 5px);
+    border:1px solid #9aa1aa;}
+  .inst-legend .lg-cuba{background:linear-gradient(180deg,#fff,#8e97a1);}
+  .t3-panel .inst-desc{text-align:center;margin:14px auto 0;color:var(--muted);
+    font-size:.9rem;font-weight:300;min-height:1.4em;}
+
   /* comentario minimalista bajo las piletas: shimmer lento sobre el texto */
   /* calificado con .t3-panel: si no, .t3-panel p le pisa el margen (misma trampa
      que el indicador de medida) */
@@ -552,6 +578,7 @@
     html.js .topbar,html.js .hero::before,html.js .hero-title{animation:none;}
     html.js .ess-reveal{opacity:1;transform:none;transition:none;}
     .pvd-note span{animation:none;}
+    .inst-fig{transition:opacity .01s linear;transform:none;}
   }
 
   /* footer */
@@ -753,12 +780,61 @@
         </div>
         <div class="t3-panel" data-t3="instalacion">
           <p>Tres opciones diferentes para una integración perfecta con cada estilo.</p>
-          <div class="swatches">
-            <button class="pill">Enrasada</button>
-            <button class="pill">Bajo mesada</button>
-            <button class="pill">Sobre mesada</button>
+          <div class="swatches" data-inst-pills>
+            <button class="pill" data-inst="enrasada">Enrasada</button>
+            <button class="pill" data-inst="bajo">Bajo mesada</button>
+            <button class="pill" data-inst="sobre">Sobre mesada</button>
           </div>
-          <div class="inst-media"><img src="assets/instalacion.jpg" alt="Essentia instalada en mesada"></div>
+
+          <!-- esquema de instalación en corte (SVG): la mesada va rayada y la pileta
+               con trazo de acero, para que se distingan de un vistazo -->
+          <div class="inst-scheme">
+            <svg viewBox="0 0 420 270" role="img" aria-label="Esquema de los modos de instalación">
+              <defs>
+                <pattern id="mesada-tramado" width="9" height="9" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+                  <line x1="0" y1="0" x2="0" y2="9" stroke="#7d858f" stroke-width="2.4"/>
+                </pattern>
+                <linearGradient id="acero" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#ffffff"/>
+                  <stop offset="55%" stop-color="#c9d0d8"/>
+                  <stop offset="100%" stop-color="#8e97a1"/>
+                </linearGradient>
+              </defs>
+
+              <!-- SOBRE MESADA: el reborde apoya por encima de la mesada -->
+              <g class="inst-fig" data-inst-fig="sobre">
+                <rect class="mesada" x="14" y="112" width="112" height="26" rx="2"/>
+                <rect class="mesada" x="294" y="112" width="112" height="26" rx="2"/>
+                <path class="cuba-fondo" d="M140,109 H280 V232 H140 Z"/>
+                <path class="cuba" d="M112,109 H140 V232 H280 V109 H308"/>
+              </g>
+
+              <!-- ENRASADA: el reborde queda al ras de la superficie -->
+              <g class="inst-fig" data-inst-fig="enrasada">
+                <rect class="mesada" x="14" y="112" width="98" height="26" rx="2"/>
+                <rect class="mesada" x="308" y="112" width="98" height="26" rx="2"/>
+                <rect class="mesada" x="112" y="124" width="28" height="14"/>
+                <rect class="mesada" x="280" y="124" width="28" height="14"/>
+                <path class="cuba-fondo" d="M140,112 H280 V232 H140 Z"/>
+                <path class="cuba" d="M112,112 H140 V232 H280 V112 H308"/>
+                <line class="ras" x1="14" y1="112" x2="406" y2="112"/>
+              </g>
+
+              <!-- BAJO MESADA: la pileta va colgada debajo del hueco -->
+              <g class="inst-fig" data-inst-fig="bajo">
+                <rect class="mesada" x="14" y="112" width="126" height="26" rx="2"/>
+                <rect class="mesada" x="280" y="112" width="126" height="26" rx="2"/>
+                <path class="cuba-fondo" d="M140,138 H280 V244 H140 Z"/>
+                <path class="cuba" d="M112,141 H140 V244 H280 V141 H308"/>
+              </g>
+            </svg>
+
+            <div class="inst-legend">
+              <span><i class="lg-mesada"></i>Mesada</span>
+              <span><i class="lg-cuba"></i>Pileta</span>
+            </div>
+            <p class="inst-desc" data-inst-desc></p>
+          </div>
         </div>
       </div>
     </div>
@@ -1256,6 +1332,30 @@
     if(!btn || !WA_NUMERO) return;
     btn.href = 'https://wa.me/' + WA_NUMERO + '?text=' + encodeURIComponent(WA_TEXTO);
     btn.style.display = 'flex';
+  })();
+</script>
+
+<script>
+  // Esquema de instalación: cambia la figura y el texto según el modo elegido
+  (function(){
+    var pills = document.querySelectorAll('[data-inst-pills] [data-inst]');
+    var figs  = document.querySelectorAll('[data-inst-fig]');
+    var desc  = document.querySelector('[data-inst-desc]');
+    if(!pills.length || !figs.length) return;
+    var TXT = {
+      enrasada: 'La pileta queda al ras de la mesada: superficie continua, sin escalón.',
+      bajo:     'La pileta se monta debajo del hueco y el canto de la mesada queda a la vista.',
+      sobre:    'El reborde de la pileta apoya sobre la mesada. Es la instalación más simple.'
+    };
+    function set(k){
+      figs.forEach(function(f){ f.classList.toggle('on', f.getAttribute('data-inst-fig') === k); });
+      pills.forEach(function(p){ p.classList.toggle('sel', p.getAttribute('data-inst') === k); });
+      if(desc) desc.textContent = TXT[k] || '';
+    }
+    pills.forEach(function(p){
+      p.addEventListener('click', function(){ set(p.getAttribute('data-inst')); });
+    });
+    set('enrasada');
   })();
 </script>
 </body>
