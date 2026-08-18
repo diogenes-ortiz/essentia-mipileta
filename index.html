@@ -602,9 +602,9 @@
 
     /* mobile: la MISMA foto y el MISMO wordmark que desktop (la vertical vieja traía
        el texto incrustado en baja calidad). El 4/5 deja entrar la cuba cobre entera. */
-    .hero{aspect-ratio:4/5;margin-top:0;}
-    .hero::before{background-position:center;}
-    .hero-title{display:block;width:min(64vw,320px);top:6%;}
+    .hero{aspect-ratio:941/1672;margin-top:0;}
+    .hero::before{background-image:url('assets/essentia-hero-mobile-trio.png');background-position:center;}
+    .hero-title{display:block;width:min(58vw,240px);top:3.5%;}
 
     /* hero 3D más compacto, no domina la pantalla */
     .hero-3d .container{padding-top:36px;}
@@ -776,7 +776,7 @@
           </div>
           </div>
           </div>
-          <p class="pvd-note"><span>Tratamiento de PDB para garantizar el color para toda la vida</span></p>
+          <p class="pvd-note"><span>Tratamiento de PVD para garantizar el color para toda la vida</span></p>
         </div>
         <div class="t3-panel" data-t3="instalacion">
           <p>Tres opciones diferentes para una integración perfecta con cada estilo.</p>
@@ -1296,16 +1296,26 @@
     /* Alinea el botón de catálogo con el desagüe de la pileta central.
        Se calcula sobre el render real del background (cover + center), así queda
        clavado aunque la foto se recorte en mobile o cambie la barra de scroll. */
-    var FOTO_W = 1672, FOTO_H = 941, TAPON_X = 833.5; // medidos sobre essentia-hero-trio.png
+    // medidos sobre cada foto del hero: el tapon NO cae en el centro exacto
+    var FOTOS = {
+      'essentia-hero-trio.png':        {w:1672, h:941,  tapon:833.5},
+      'essentia-hero-mobile-trio.png': {w:941,  h:1672, tapon:469.5}
+    };
+    function fotoDelHero(hero){
+      var bg = getComputedStyle(hero, '::before').backgroundImage || '';
+      for (var k in FOTOS) if (bg.indexOf(k) !== -1) return FOTOS[k];
+      return FOTOS['essentia-hero-trio.png'];
+    }
     function alinearBoton(){
       var hero = document.getElementById('hero');
       var btn = document.querySelector('.float-cat');
       if(!hero || !btn) return;
       var r = hero.getBoundingClientRect();
       if(!r.width) return;
-      var escala = Math.max(r.width / FOTO_W, r.height / FOTO_H);   // background-size:cover
-      var origenX = r.left + (r.width - FOTO_W * escala) / 2;        // background-position:center
-      btn.style.left = (origenX + TAPON_X * escala).toFixed(1) + 'px';
+      var f = fotoDelHero(hero);
+      var escala = Math.max(r.width / f.w, r.height / f.h);          // background-size:cover
+      var origenX = r.left + (r.width - f.w * escala) / 2;           // background-position:center
+      btn.style.left = (origenX + f.tapon * escala).toFixed(1) + 'px';
     }
     function todo(){ medir(); alinearBoton(); }
     todo();
