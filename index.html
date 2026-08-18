@@ -401,6 +401,23 @@
 
 
 
+
+  /* link minimalista del tutorial: sin caja, con subrayado que crece en hover */
+  .tuto-link{
+    display:inline-flex;align-items:center;gap:9px;margin:22px auto 0;
+    color:var(--muted);font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;
+    text-decoration:none;position:relative;transition:color .3s ease;
+  }
+  .inst-scheme{text-align:center;}
+  /* .inst-scheme svg{width:100%} lo pisa por orden: hay que calificar más */
+  .inst-scheme .tuto-link svg{width:17px;height:17px;flex:none;fill:none;stroke:currentColor;stroke-width:1.4;}
+  .tuto-link svg path{fill:currentColor;stroke:none;}
+  .tuto-link span{position:relative;padding-bottom:4px;}
+  .tuto-link span::after{content:'';position:absolute;left:0;bottom:0;height:1px;width:0;
+    background:currentColor;transition:width .35s cubic-bezier(.4,0,.2,1);}
+  .tuto-link:hover{color:#f2f5f8;}
+  .tuto-link:hover span::after{width:100%;}
+
   /* ---------- esquema de instalación (SVG en corte) ---------- */
   .inst-scheme{max-width:560px;margin:26px auto 0;}
   .inst-scheme svg{width:100%;height:auto;display:block;overflow:visible;}
@@ -837,6 +854,10 @@
               <span><i class="lg-cuba"></i>Pileta</span>
             </div>
             <p class="inst-desc" data-inst-desc></p>
+            <a class="tuto-link" id="tuto-link" href="#" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10.2"/><path d="M10 8.4 16 12l-6 3.6Z"/></svg>
+              <span>Ver tutorial de instalación</span>
+            </a>
           </div>
         </div>
       </div>
@@ -1368,6 +1389,14 @@
     pills.forEach(function(p){
       p.addEventListener('click', function(){ set(p.getAttribute('data-inst')); });
     });
+
+    // Tutorial: cargar acá el link (video de YouTube, PDF, etc.). Vacío = no navega.
+    var TUTORIAL_URL = 'https://www.youtube.com/watch?v=ei1y7G4JyyM';
+    var tuto = document.getElementById('tuto-link');
+    if(tuto){
+      if(TUTORIAL_URL){ tuto.href = TUTORIAL_URL; }
+      else { tuto.addEventListener('click', function(e){ e.preventDefault(); }); }
+    }
     set('enrasada');
   })();
 </script>
