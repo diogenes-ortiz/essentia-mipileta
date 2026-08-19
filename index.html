@@ -1381,22 +1381,30 @@
       bajo:     'La pileta se monta debajo del hueco y el canto de la mesada queda a la vista.',
       sobre:    'El reborde de la pileta apoya sobre la mesada. Es la instalación más simple.'
     };
+
+    // Un tutorial por modo (títulos oficiales del canal Mi Pileta):
+    //   bajo     -> 'colocación de pileta bajomesada'
+    //   sobre    -> 'colocación de pileta de encastre'
+    //   enrasada -> 'colocación de productos'
+    var TUTORIALES = {
+      enrasada: 'https://www.youtube.com/watch?v=g3jLrV_NTKI',
+      bajo:     'https://www.youtube.com/watch?v=MLWkF-hHZaI',
+      sobre:    'https://www.youtube.com/watch?v=WPoPcBXMASI'
+    };
     function set(k){
       figs.forEach(function(f){ f.classList.toggle('on', f.getAttribute('data-inst-fig') === k); });
       pills.forEach(function(p){ p.classList.toggle('sel', p.getAttribute('data-inst') === k); });
       if(desc) desc.textContent = TXT[k] || '';
+      var tuto = document.getElementById('tuto-link');
+      if(tuto){
+        var url = TUTORIALES[k];
+        if(url){ tuto.href = url; tuto.style.display = ''; }
+        else { tuto.style.display = 'none'; }
+      }
     }
     pills.forEach(function(p){
       p.addEventListener('click', function(){ set(p.getAttribute('data-inst')); });
     });
-
-    // Tutorial: cargar acá el link (video de YouTube, PDF, etc.). Vacío = no navega.
-    var TUTORIAL_URL = 'https://www.youtube.com/watch?v=ei1y7G4JyyM';
-    var tuto = document.getElementById('tuto-link');
-    if(tuto){
-      if(TUTORIAL_URL){ tuto.href = TUTORIAL_URL; }
-      else { tuto.addEventListener('click', function(e){ e.preventDefault(); }); }
-    }
     set('enrasada');
   })();
 </script>
