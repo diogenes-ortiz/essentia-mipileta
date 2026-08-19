@@ -744,7 +744,7 @@
       id="essentia-video"
       class="model3d"
       src="assets/video-essentia.mp4"
-      autoplay muted loop playsinline
+      autoplay muted loop playsinline preload="auto"
       aria-label="Pileta Essentia en video"></video>
   </div>
 
@@ -1398,6 +1398,25 @@
       else { tuto.addEventListener('click', function(e){ e.preventDefault(); }); }
     }
     set('enrasada');
+  })();
+</script>
+
+<script>
+  // El video de producto arranca con la página (mientras se ve el banner), así
+  // cuando el visitante baja hasta él ya está avanzado y no empieza de cero.
+  (function(){
+    var v = document.getElementById('essentia-video');
+    if(!v) return;
+    function arrancar(){
+      var p = v.play();
+      if(p && p.catch) p.catch(function(){ /* si el navegador lo bloquea, sigue con autoplay */ });
+    }
+    if(v.readyState >= 2) arrancar();
+    v.addEventListener('loadeddata', arrancar, {once:true});
+    v.addEventListener('canplay', arrancar, {once:true});
+    // si el navegador lo pausa por estar fuera de pantalla, lo retomamos sin reiniciar
+    document.addEventListener('visibilitychange', function(){ if(!document.hidden) arrancar(); });
+    addEventListener('scroll', function(){ if(v.paused) arrancar(); }, {passive:true, once:true});
   })();
 </script>
 </body>
