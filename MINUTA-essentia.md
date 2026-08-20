@@ -36,7 +36,8 @@ Partió como réplica del template **Signature Series de Johnson Acero** y se ad
 7. **"Essentia desde adentro"** (sección Modelos, id `#griferias-glow`) — **planos técnicos**. Acordeón **640 → 671** (chica a grande); al abrir cada modelo muestra su plano (PNG transparente líneas blancas): `plano-640/660/670/671.png`.
 8. **"Dónde comprar"** — **mapa dark flotante**. Escribís una zona/dirección → muestra **un solo distribuidor** (el más cercano) + **un pin** metálico. Datos DEMO (Palermo, Belgrano, Caballito, Recoleta). Mapa estilizado (NO es Google Maps real).
 9. **CTA final** `#compra-segura` (enlazada desde el menú) "Compra segura" + bloque de **Garantía de 10 Años** (texto AISI 304-18/8 y 18/10) + botones Comprar en Mercado Libre y Dónde comprar.
-10. **Footer**.
+10. **Newsletter** (`#newsletter`, al final) — cuatro perfiles en pills: **Para mi casa · Arquitectura · Mueblería · Instalación** (el consumidor final va por momento, no por categoría; los oficios como rubro para no etiquetar a la persona) + campo de correo. En GitHub **valida y agradece pero NO envía** (es estático); en Shopify el build lo cambia por el form nativo de altas y el perfil viaja como **etiqueta del cliente** (`newsletter, <perfil>`) para segmentar. El mismo JS sirve en los dos: si el form tiene `action` (Shopify) deja pasar el envío real. El validador de correo NO usa regex a propósito (se rompía al escapar).
+11. **Footer**.
 
 ## Pendientes / TODO
 - [ ] **Comprimir** `catalogo-essentia.pdf` (17,8 MB). El video ya quedó en 6,3 MB. Para comprimir hay receta: `npm i ffmpeg-static` en el scratchpad y usar el binario.
