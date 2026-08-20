@@ -356,6 +356,31 @@
   .swatch.black{background:linear-gradient(135deg,#3a3a3a,#0a0a0a);}
   .swatch.steel{background:linear-gradient(135deg,#d8d8d8,#9a9a9a);}
   .swatch.goldblack{background:linear-gradient(135deg,#e6c79a,#1a1a1a);}
+
+  /* ---------- newsletter ---------- */
+  .news-wrap{max-width:560px;margin:0 auto;}
+  .news-lead{color:var(--muted);font-size:.95rem;font-weight:300;margin:14px 0 0;}
+  .news-label{color:var(--muted);font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;
+    margin:30px 0 0;}
+  .news-form .swatches{justify-content:center;margin-top:14px;}
+  .news-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:22px;}
+  .news-row input{
+    flex:1 1 260px;max-width:320px;background:rgba(255,255,255,.05);color:#fff;
+    border:1px solid rgba(255,255,255,.45);border-radius:99px;padding:13px 22px;
+    font-family:inherit;font-size:.9rem;outline:none;transition:border-color .25s ease;
+  }
+  .news-row input::placeholder{color:#7d838b;}
+  .news-row input:focus{border-color:#fff;}
+  .news-row input.err{border-color:#d85e5e;}
+  .news-row .btn{flex:none;}
+  .news-msg{min-height:1.4em;margin:16px 0 0;font-size:.88rem;font-weight:300;}
+  .news-msg.ok{color:#cfe8d4;}
+  .news-msg.bad{color:#e08a8a;}
+  @media(max-width:640px){
+    .news-row{flex-direction:column;align-items:stretch;}
+    .news-row input,.news-row .btn{max-width:none;width:100%;}
+  }
+
   /* ---------- botones flotantes (z-index < 9999 del gate) ---------- */
   /* mismo lenguaje que el botón de catálogo: outline claro sobre vidrio oscuro */
   .float-wsp{
@@ -1000,6 +1025,37 @@
   </div>
 </section>
 
+
+<!-- ================= NEWSLETTER ================= -->
+<section class="section" id="newsletter">
+  <div class="container" style="text-align:center;">
+    <div class="news-wrap">
+      <p class="eyebrow">Newsletter</p>
+      <h2 class="intro-h2" style="margin-top:14px;">Novedades de <strong>Essentia</strong></h2>
+      <p class="news-lead">Lanzamientos, terminaciones nuevas y novedades de la línea, sin spam.</p>
+
+      <!-- NEWSLETTER:FORM-INICIO (el build lo cambia por el form nativo de Shopify (customer) en Shopify) -->
+      <form class="news-form" id="news-form" novalidate>
+        <p class="news-label">¿Desde dónde nos escribís?</p>
+        <div class="swatches" data-news-pills>
+          <button type="button" class="pill sel" data-perfil="Para mi casa">Para mi casa</button>
+          <button type="button" class="pill" data-perfil="Arquitectura">Arquitectura</button>
+          <button type="button" class="pill" data-perfil="Mueblería">Mueblería</button>
+          <button type="button" class="pill" data-perfil="Instalación">Instalación</button>
+        </div>
+        <input type="hidden" name="perfil" id="news-perfil" value="Para mi casa">
+        <div class="news-row">
+          <input type="email" id="news-email" name="email" placeholder="Tu correo electrónico"
+                 autocomplete="email" aria-label="Tu correo electrónico">
+          <button type="submit" class="btn btn-metal">Suscribirme</button>
+        </div>
+        <p class="news-msg" id="news-msg" role="status" aria-live="polite"></p>
+      </form>
+      <!-- NEWSLETTER:FORM-FIN -->
+    </div>
+  </div>
+</section>
+
 <!-- ================= FOOTER ================= -->
 <footer class="foot">
   <div class="container">
@@ -1425,6 +1481,61 @@
     // si el navegador lo pausa por estar fuera de pantalla, lo retomamos sin reiniciar
     document.addEventListener('visibilitychange', function(){ if(!document.hidden) arrancar(); });
     addEventListener('scroll', function(){ if(v.paused) arrancar(); }, {passive:true, once:true});
+  })();
+</script>
+
+<script>
+  // Newsletter: elige perfil y valida el correo.
+  // OJO: en GitHub Pages es HTML estático, no hay backend: valida y agradece, pero
+  // NO envía. En Shopify el build lo reemplaza por el form nativo de Shopify (customer) y el perfil
+  // viaja como etiqueta del cliente para poder segmentar los envíos.
+  (function(){
+    var form = document.getElementById('news-form');
+    if(!form) return;
+    var pills = form.querySelectorAll('[data-news-pills] [data-perfil]');
+    var hidden = document.getElementById('news-perfil');
+    var email = document.getElementById('news-email');
+    var msg = document.getElementById('news-msg');
+
+    pills.forEach(function(p){
+      p.addEventListener('click', function(){
+        pills.forEach(function(o){ o.classList.remove('sel'); });
+        p.classList.add('sel');
+        hidden.value = (hidden.name === 'contact[tags]' ? 'newsletter, ' : '') + p.getAttribute('data-perfil');
+      });
+    });
+
+    /* sin regex a propósito: comprueba que haya un @, un punto después con al menos
+       dos letras finales, y ningún espacio. Suficiente para un alta de newsletter. */
+    function valido(v){
+      v = (v || "").trim();
+      var a = v.indexOf("@"), p = v.lastIndexOf(".");
+      return a > 0 && p > a + 1 && p < v.length - 2 && v.indexOf(" ") === -1;
+    }
+
+    /* el form de Shopify trae action; el estático de GitHub no. Así el mismo JS
+       sirve para los dos: valida siempre, y solo simula el envío donde no hay backend. */
+    var enShopify = !!form.getAttribute('action');
+
+    form.addEventListener('submit', function(e){
+      var v = email.value;
+      if(!valido(v)){
+        e.preventDefault();
+        email.classList.add('err');
+        msg.className = 'news-msg bad';
+        msg.textContent = 'Revisá el correo, parece que falta algo.';
+        email.focus();
+        return;
+      }
+      email.classList.remove('err');
+      if(enShopify) return;                      // lo procesa Shopify (alta de cliente)
+      e.preventDefault();                        // en GitHub no hay a dónde mandarlo
+      msg.className = 'news-msg ok';
+      msg.textContent = '¡Listo! Te vamos a escribir a ' + v.trim() + '.';
+      form.reset();
+      hidden.value = hidden.name === 'contact[tags]' ? 'newsletter, Para mi casa' : 'Para mi casa';
+      pills.forEach(function(o, i){ o.classList.toggle('sel', i === 0); });
+    });
   })();
 </script>
 </body>
