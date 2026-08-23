@@ -514,6 +514,16 @@
   .product h3{font-size:1.2rem;font-weight:400;margin:16px 0 8px;}
   .product p{color:var(--muted);font-size:.9rem;font-weight:300;margin:0;}
 
+
+  /* accesorios con dos terminaciones: se funden entre sí, del mismo porte */
+  .acc-dual{position:relative;}
+  .acc-dual .acc-frame{
+    position:absolute;inset:0;margin:auto;max-width:100%;max-height:100%;
+    width:auto;height:auto;object-fit:contain;
+    opacity:0;transition:opacity 1s cubic-bezier(.4,0,.2,1);
+  }
+  .acc-dual .acc-frame.on{opacity:1;}
+
   /* ---------- buttons / CTA ---------- */
   .btn{
     display:inline-block;padding:14px 30px;border-radius:7px;font-weight:700;
@@ -889,7 +899,10 @@
 
     <div class="acc-cards">
       <div class="product">
-        <div class="acc-img"><img src="assets/acc-barra.png?v=2" alt="Barra escurridora"></div>
+        <div class="acc-img acc-dual">
+          <img class="acc-frame on" src="assets/acc-barra.png?v=2" alt="Barra escurridora satinada">
+          <img class="acc-frame" src="assets/acc-barra-negra.png" alt="Barra escurridora negra">
+        </div>
         <h3>Barra escurridora</h3>
         <p>Compartimientos desmontables para un escurrido eficiente y una cocina siempre ordenada.</p>
       </div>
@@ -899,12 +912,18 @@
         <p>Superficie de trabajo que se integra a la pileta para ganar espacio y practicidad al cocinar.</p>
       </div>
       <div class="product">
-        <div class="acc-img"><img src="assets/acc-cesto.png?v=2" alt="Cesto escurridor"></div>
+        <div class="acc-img acc-dual">
+          <img class="acc-frame on" src="assets/acc-cesto.png?v=2" alt="Cesto escurridor satinado">
+          <img class="acc-frame" src="assets/acc-cesto-rose.png" alt="Cesto escurridor rose">
+        </div>
         <h3>Cesto escurridor</h3>
         <p>Cesto práctico para escurrir y secar utensilios, manteniendo cada cosa en su lugar.</p>
       </div>
       <div class="product">
-        <div class="acc-img"><img src="assets/acc-rejilla.png?v=2" alt="Rejilla flexible"></div>
+        <div class="acc-img acc-dual">
+          <img class="acc-frame on" src="assets/acc-rejilla.png?v=2" alt="Rejilla flexible satinada">
+          <img class="acc-frame" src="assets/acc-rejilla-negra.png" alt="Rejilla flexible negra">
+        </div>
         <h3>Rejilla flexible</h3>
         <p>Se enrolla sobre la pileta para escurrir y secar, y se guarda en un cajón.</p>
       </div>
@@ -1524,6 +1543,27 @@
       form.reset();
       hidden.value = hidden.name === 'contact[tags]' ? 'newsletter, Para mi casa' : 'Para mi casa';
       pills.forEach(function(o, i){ o.classList.toggle('sel', i === 0); });
+    });
+  })();
+</script>
+
+<script>
+  // Accesorios: los que vienen en dos terminaciones alternan solos (satinado <-> color).
+  // Van desfasados entre sí para que la fila no parpadee toda junta.
+  (function(){
+    var duales = document.querySelectorAll('.acc-dual');
+    if(!duales.length) return;
+    duales.forEach(function(caja, i){
+      var fotos = caja.querySelectorAll('.acc-frame');
+      if(fotos.length < 2) return;
+      var n = 0;
+      setTimeout(function(){
+        setInterval(function(){
+          fotos[n].classList.remove('on');
+          n = (n + 1) % fotos.length;
+          fotos[n].classList.add('on');
+        }, 4200);
+      }, i * 1400);
     });
   })();
 </script>
