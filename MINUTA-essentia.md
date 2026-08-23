@@ -40,7 +40,7 @@ Partió como réplica del template **Signature Series de Johnson Acero** y se ad
 11. **Footer**.
 
 ## Pendientes / TODO
-- [ ] **Comprimir** `catalogo-essentia.pdf` (17,8 MB). El video ya quedó en 6,3 MB. Para comprimir hay receta: `npm i ffmpeg-static` en el scratchpad y usar el binario.
+- [ ] Opcional: borrar `assets/catalogo-essentia.pdf` (17,8 MB, ya no se usa: el catálogo está en Drive). Para comprimir videos hay receta: `npm i ffmpeg-static` en el scratchpad y usar el binario.
 - [ ] **Distribuidores reales** del mapa por zona (hoy son datos de ejemplo). Opcional: Google Maps real (necesita API key).
 - [ ] Definir si Accesorios lleva **1 o 2 fotos por card** (hoy 1; la idea original era satinada + black).
 
@@ -52,7 +52,7 @@ Partió como réplica del template **Signature Series de Johnson Acero** y se ad
 - **Centrado / full-bleed (NO usar `100vw`):** `100vw` incluye la barra de scroll y descentra todo (el banner familia se iba 7px). El JS del final del body setea `--vw` (ancho real del contenido) y `--fixoff` (corrección para elementos `position:fixed` centrados, medida en vivo porque cada navegador ancla distinto). Usar `var(--vw)` en los full-bleed (`.familia-banner`, `.familia-video`, `.acc-cards`) y `var(--fixoff)` en los flotantes. Se recalcula con resize + ResizeObserver.
 - **Márgenes en `.t3-panel p`:** esa regla trae `margin:0 auto`; si una regla propia pone `margin:X 0 0`, el bloque pierde el centrado y queda pegado a la izquierda (le pasó al indicador de medida). Siempre `margin:X auto 0`.
 - **Master de video:** el `.mov` original está en **ProRes** → NO reproduce en navegadores; siempre usar export **H.264 .mp4**.
-- **Botones flotantes** (z-index 900, bajo el gate 9999): `.float-cat` = pill blanca centrada abajo que descarga `assets/catalogo-essentia.pdf` (17,8 MB, el PDF oficial "ESSENTIA diseño puro funcionalidad absoluta"); `.float-wsp` = burbuja outline (44px, ícono blanco) abajo a la derecha con el número **5491128563001**, configurado en la constante `WA_NUMERO` del script al final del body (si se vacía, el botón se oculta solo; nunca inventar un número). Ambos flotantes comparten el mismo estilo: vidrio oscuro + borde blanco, hover invierte a blanco lleno.
+- **Botones flotantes** (z-index 900, bajo el gate 9999): `.float-cat` = pill outline centrada abajo (alineada al desagüe) que abre el **catálogo en Google Drive** (archivo público `1iskmdVyorX49qJoOP1mKNbuMj8o2RP_H`; se actualiza desde Drive sin tocar la web). El viejo `assets/catalogo-essentia.pdf` quedó sin uso; `.float-wsp` = burbuja outline (44px, ícono blanco) abajo a la derecha con el número **5491128563001**, configurado en la constante `WA_NUMERO` del script al final del body (si se vacía, el botón se oculta solo; nunca inventar un número). Ambos flotantes comparten el mismo estilo: vidrio oscuro + borde blanco, hover invierte a blanco lleno.
 
 ## Cómo pedir cambios en la próxima sesión
 Mencionar que el proyecto es el HTML `signature-series.html` en `Downloads/Cloud`, con esta minuta como referencia.
