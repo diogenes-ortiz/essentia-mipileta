@@ -68,6 +68,15 @@ shopify theme push --theme 181549990252 --store mipileta.myshopify.com \
    vuelve ALTURA cuando el media query pone `flex-direction:column`. Así el campo del
    newsletter quedaba de 260 px de alto en mobile. Se corrige con `flex:0 0 auto`.
 10. **Inputs en mobile: `font-size:16px` exactos.** Con menos, iOS hace zoom al enfocar.
+11. **GitHub Pages corre Jekyll y falla en silencio.** Jekyll interpreta Liquid en los
+    `.md` y `.html` del repo. La trampa 1 de esta lista, escrita como texto en el handoff,
+    alcanzó para romper el build: Pages devolvía "Page build failed", **el push salía bien**
+    y el sitio seguía sirviendo la última versión que compiló, sin ningún aviso.
+    Ya está el archivo vacío **`.nojekyll`** en la raíz del repo, que desactiva Jekyll.
+    **No borrarlo.** Si alguna vez la web no muestra los cambios aunque el push haya
+    andado, revisar el build antes que cualquier otra cosa:
+    `gh api repos/diogenes-ortiz/essentia-mipileta/pages/builds?per_page=5`
+    (el campo `status` tiene que decir `built`, no `errored`).
 
 ## 5. Estado de cada sección
 
