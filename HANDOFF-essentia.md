@@ -108,10 +108,17 @@ shopify theme push --theme 181549990252 --store mipileta.myshopify.com \
 6. **Complementos** (id interno `#accesorios`): eyebrow "Complementos", título "Todo lo que
    necesitás, a mano". **Nunca decir "incluido"** (ago 2026): hacía pensar que venían de
    regalo con la pileta, y se venden aparte.
-   4 cards (barra, tabla, cesto, rejilla), fotos recortadas al contenido.
+   **6 cards** (barra, tabla, cesto, rejilla, box de residuos, dosificador), fotos recortadas
+   al contenido. Grilla de **3 columnas** en desktop (2 filas parejas) y 2x3 en mobile.
    **Cada card va al detalle del producto en Shopify** con hover (se eleva + "Ver en catálogo →"):
    barra→`barra-escurridora-compacta-50`, tabla→`tablas-de-vidrio`,
-   cesto→`cestos-escurridores`, rejilla→`rejilla-flexible`.
+   cesto→`cestos-escurridores`, rejilla→`rejilla-flexible`, box→`box-inox`,
+   dosificador→`dosificador-1004` (es el de **cabezal cuadrado**; el 1000 lo tiene redondeado).
+   Las fotos del box y del dosificador venían con **fondo blanco**: se recortaron con relleno
+   por inundación **desde los bordes**. No se puede filtrar "todo lo blanco" porque la botella
+   del dosificador ES blanca y se borraría; solo es fondo lo blanco conectado al borde.
+   **PENDIENTE:** la ficha del Dosificador 1004 en Shopify lista piletas compatibles y **no
+   incluye los modelos Essentia**. Puede ser una lista vieja: confirmarlo con el cliente.
    Cesto y rejilla **alternan satinado↔color** (a la vez, cada 2,8 s).
 7. **"Dónde comprar"**: mapa con distribuidores **DEMO** — **OCULTO** (`display:none`).
    Para reactivarlo: sacar el `display:none` y devolver el botón "Dónde comprar" al CTA.

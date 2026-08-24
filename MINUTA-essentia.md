@@ -61,6 +61,20 @@ Partió como réplica del template **Signature Series de Johnson Acero** y se ad
      (la nuestra tiene 7 por panel, la "60" tiene 8); las otras dos variantes son negras.
    - **Cada card es un link a la tienda** (`a.product`, abre en pestaña nueva) con hover: la card se eleva, la foto crece 5% y aparece "Ver en la tienda →" (en táctil el aviso queda fijo). Tabla→`/products/tablas-de-vidrio`, cesto→`/products/cestos-escurridores`; **barra y rejilla van a la colección** `?filter.p.vendor=Accesorios` porque de barra hay 4 variantes (50/60, acero/negra) y no se sabe cuál es la de la foto, y la rejilla no existe como producto en la tienda. PENDIENTE confirmar con el usuario.
    - La **tabla de vidrio** se aclaró (gamma 0.62 + piso de luz): pasó de luminancia media 6 a 34, porque en negro sobre negro se perdía.
+   - **Box de residuos y Dosificador (ago 2026):** se sumaron, la grilla pasó a **3 columnas**
+     (6 cards = 2 filas parejas; 2x3 en mobile). Enlazan a `/products/box-inox` y
+     `/products/dosificador-1004`. **El dosificador es el 1004**, no el 1000: se identificó por
+     el cabezal cuadrado (el 1000 lo tiene redondeado).
+     Sus fotos venían con **fondo blanco**, no recortadas como el resto. Se les sacó el fondo
+     con **relleno por inundación desde los bordes**: NO se puede filtrar "todo lo blanco",
+     porque la botella del dosificador ES blanca y se borraría; solo es fondo lo blanco
+     conectado al borde de la imagen. Después se recortan al contenido (+3%) y salen en WebP.
+     El script quedó en el scratchpad (`key.js`).
+     **OJO:** la ficha del Dosificador 1004 en Shopify lista las piletas compatibles y **no
+     incluye los modelos de Essentia** (450E, 462E, 503E...). Puede ser una lista vieja, pero
+     conviene confirmarlo con el cliente antes de publicar.
+   - La foto vieja `acc-box-inox.png` NO es un box: es la barra escurridora sobre fondo negro.
+     El box sale de `acc-box.png`.
    - **La barra NO alterna**: sus dos fotos son tomas con encuadres distintos (no el mismo render con otro color), así que no hay forma de alinearlas. Queda con la satinada. Si aparece la negra con el mismo encuadre, se suma.
    - La **tabla** también queda con una sola (sus dos fotos son casi idénticas).
 7. **"Dónde comprar"** — **OCULTO (ago 2026, pedido del cliente)**: la sección sigue en el
