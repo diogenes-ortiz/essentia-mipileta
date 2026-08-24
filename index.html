@@ -524,6 +524,15 @@
   }
   .acc-dual .acc-frame.on{opacity:1;}
 
+
+  /* nota de Mercado Libre (sin link por ahora) */
+  .ml-nota{
+    display:flex;align-items:center;justify-content:center;gap:10px;margin:30px auto 0;
+    color:var(--muted);font-size:.86rem;font-weight:300;line-height:1.5;
+    max-width:420px;text-align:left;
+  }
+  .ml-nota svg{width:17px;height:17px;flex:none;fill:none;stroke:currentColor;stroke-width:1.5;}
+
   /* ---------- buttons / CTA ---------- */
   .btn{
     display:inline-block;padding:14px 30px;border-radius:7px;font-weight:700;
@@ -927,9 +936,10 @@
     </div>
     </div>
 
-    <div class="cta-row">
-      <a class="btn btn-metal" href="#">Comprar en Mercado Libre</a>
-    </div>
+    <p class="ml-nota">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7.2"/><path d="M16.5 16.5 21 21"/></svg>
+      <span>Encontranos en Mercado Libre a través de nuestros distribuidores.</span>
+    </p>
   </div>
 </section>
 
@@ -1023,9 +1033,12 @@
       <p style="margin-top:20px;color:#e9ecef;font-size:1rem;font-weight:600;">Garantía de 10 Años</p>
       <p style="margin-top:8px;color:var(--muted);font-size:.9rem;font-weight:300;line-height:1.65;">Se cubre a sus piletas y mesadas de acero inoxidable AISI 304-18/8 y 18/10 mediante esta GARANTÍA indiscutible de defectos de fabricación, en usos normales, por el término de 10 años.</p>
       <div class="cta-row">
-        <a class="btn btn-metal" href="#">Comprar en Mercado Libre</a>
         <a class="btn btn-outline" href="#donde-comprar">Dónde comprar</a>
       </div>
+      <p class="ml-nota">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7.2"/><path d="M16.5 16.5 21 21"/></svg>
+        <span>Encontranos en Mercado Libre a través de nuestros distribuidores.</span>
+      </p>
     </div>
   </div>
 </section>
