@@ -115,7 +115,8 @@ shopify theme push --theme 181549990252 --store mipileta.myshopify.com \
    Cesto y rejilla **alternan satinado↔color** (a la vez, cada 2,8 s).
 7. **"Dónde comprar"**: mapa con distribuidores **DEMO** — **OCULTO** (`display:none`).
    Para reactivarlo: sacar el `display:none` y devolver el botón "Dónde comprar" al CTA.
-8. **CTA "Compra segura"** + garantía de 10 años + nota de Mercado Libre (texto, no botón).
+8. **CTA "Compra segura"** + garantía de 10 años. **Sin la nota de Mercado Libre**: estaba
+   repetida con la de Complementos, que es la única que queda en la página.
 9. **Newsletter**: título "Recibí las últimas novedades" (general, no "Novedades de Essentia").
    4 perfiles en pills (Para mi casa · Arquitectura · Mueblería · Instalación).
     En GitHub solo valida y agradece; en Shopify se convierte en alta de cliente y **el perfil
