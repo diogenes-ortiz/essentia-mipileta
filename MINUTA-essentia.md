@@ -71,9 +71,13 @@ Partió como réplica del template **Signature Series de Johnson Acero** y se ad
    Era un **mapa dark flotante**. Escribís una zona/dirección → muestra **un solo distribuidor** (el más cercano) + **un pin** metálico. Datos DEMO (Palermo, Belgrano, Caballito, Recoleta). Mapa estilizado (NO es Google Maps real).
 8. **CTA final** `#compra-segura` (enlazada desde el menú) "Compra segura" + bloque de **Garantía de 10 Años** (texto AISI 304-18/8 y 18/10) y la nota `.ml-nota` de los distribuidores.
 9. **Newsletter** (`#newsletter`, al final) — título **"Recibí las últimas novedades"** (ago 2026: antes decía "Novedades de Essentia"; se generalizó a pedido del cliente). Cuatro perfiles en pills: **Para mi casa · Arquitectura · Mueblería · Instalación** (el consumidor final va por momento, no por categoría; los oficios como rubro para no etiquetar a la persona) + campo de correo. En GitHub **valida y agradece pero NO envía** (es estático); en Shopify el build lo cambia por el form nativo de altas y el perfil viaja como **etiqueta del cliente** (`newsletter, <perfil>`) para segmentar. El mismo JS sirve en los dos: si el form tiene `action` (Shopify) deja pasar el envío real. El validador de correo NO usa regex a propósito (se rompía al escapar).
-10. **"Conocé también"** (`#otra-linea`) — cierre con el botón outline a Zíngara MÁS los enlaces a las otras líneas de Mi Pileta, agrupados en **Más líneas de cocina** (Etna · Vesta · Designia · Nova · Línea Económica) y **Lavadero** (Lavadero · Piletones). Los enlaces filtran la tienda con `filter.p.product_type=`, salvo lavadero y piletones, que van por `filter.p.vendor=` porque **no tienen product_type cargado** en Shopify. Se verificó que cada filtro devuelva productos; si el cliente renombra una línea en Shopify el filtro deja de matchear y hay que actualizar la URL. Estilo `.linea` (pill outline, 44px en táctil). Antes era solo el botón outline
+10. **"El mismo acero, en el baño"** (`#otra-linea`, ago 2026) — cierre con botón outline
     **"Conocé la línea Zíngara"** → `diogenes-ortiz.github.io/zingara-mipileta` (ojo: tiene
     gate, clave `zingara2026`). Cuando Zíngara tenga página propia en Shopify, cambiar la URL.
+    *(Se probó sumar acá un bloque "Conocé también" con las otras líneas de Mi Pileta —Etna,
+    Vesta, Designia, Nova, Económica, Lavadero, Piletones—. **Se sacó**: ese bloque va en la
+    home de marca (`mipileta-home`), no en la landing de una línea. Los datos verificados de
+    esos filtros quedaron en el brief que se pasó a esa sesión.)*
 11. **Footer**.
 
 ## Pendientes / TODO

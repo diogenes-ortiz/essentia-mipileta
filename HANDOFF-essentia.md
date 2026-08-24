@@ -120,10 +120,7 @@ shopify theme push --theme 181549990252 --store mipileta.myshopify.com \
    4 perfiles en pills (Para mi casa · Arquitectura · Mueblería · Instalación).
     En GitHub solo valida y agradece; en Shopify se convierte en alta de cliente y **el perfil
     viaja como etiqueta** para segmentar.
-10. **"Conocé también"**: el botón outline **"Conocé la línea Zíngara"** + enlaces a las otras
-    líneas de Mi Pileta (cocina: Etna, Vesta, Designia, Nova, Línea Económica; lavadero:
-    Lavadero, Piletones). Filtran la tienda por `product_type`, salvo lavadero y piletones
-    que van por `vendor` porque no tienen tipo cargado en Shopify. Botón
+10. **"El mismo acero, en el baño"**: cierre con botón outline **"Conocé la línea Zíngara"**
     → `diogenes-ortiz.github.io/zingara-mipileta` (tiene gate, clave `zingara2026`).
 11. **Footer** + botones flotantes: catálogo (Google Drive) y WhatsApp (+54 9 11 2856-3001),
     ambos outline; el de catálogo queda **clavado al desagüe** de la foto del hero.

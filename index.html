@@ -403,22 +403,6 @@
     .news-msg{font-size:.82rem;}
   }
 
-
-  /* ---------- otras lineas de Mi Pileta ("Conoce tambien") ---------- */
-  .lineas{margin-top:34px;display:flex;flex-direction:column;gap:22px;align-items:center;}
-  .lineas-grupo{width:100%;max-width:560px;}
-  .lineas-label{color:var(--muted);font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;
-    margin:0 0 12px;}
-  .lineas-links{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;}
-  /* mismo lenguaje que los pills, pero como enlace */
-  .linea{
-    display:inline-flex;align-items:center;justify-content:center;
-    padding:9px 18px;border:1px solid rgba(255,255,255,.45);border-radius:99px;
-    color:#e9ecef;font-size:.85rem;text-decoration:none;white-space:nowrap;
-    transition:background .3s ease, color .3s ease, border-color .3s ease;
-  }
-  .linea:hover{background:#fff;border-color:#fff;color:#14181e;}
-  @media (hover:none){ .linea{min-height:44px;} }
   /* ---------- botones flotantes (z-index < 9999 del gate) ---------- */
   /* mismo lenguaje que el botón de catálogo: outline claro sobre vidrio oscuro */
   .float-wsp{
@@ -1186,36 +1170,12 @@
 <!-- ================= LA OTRA LÍNEA ================= -->
 <section class="section" id="otra-linea">
   <div class="container" style="text-align:center;">
-    <div style="display:inline-block;max-width:640px;">
-      <p class="eyebrow">Conocé también</p>
-      <h2 class="intro-h2" style="margin-top:14px;">El mismo acero,<br><strong>en toda la casa</strong></h2>
-      <p style="margin-top:18px;color:var(--muted);font-size:.95rem;font-weight:300;line-height:1.65;">Essentia es una de las líneas de Mi Pileta. Zíngara lleva el mismo acero inoxidable y las mismas terminaciones PVD al baño, y hay más líneas para la cocina y el lavadero.</p>
+    <div style="display:inline-block;max-width:520px;">
+      <p class="eyebrow">Mi Pileta</p>
+      <h2 class="intro-h2" style="margin-top:14px;">El mismo acero,<br><strong>en el baño</strong></h2>
+      <p style="margin-top:18px;color:var(--muted);font-size:.95rem;font-weight:300;line-height:1.65;">Zíngara es la línea de bachas de baño: el mismo acero inoxidable y las mismas terminaciones PVD que Essentia, para el otro ambiente de la casa.</p>
       <div class="cta-row" style="margin-top:26px;">
         <a class="btn btn-outline" href="https://diogenes-ortiz.github.io/zingara-mipileta/" target="_blank" rel="noopener">Conocé la línea Zíngara</a>
-      </div>
-
-      <!-- Los enlaces filtran la tienda por tipo de producto (o por vendor, en lavadero y
-           piletones, que no tienen product_type cargado). Se verificó que cada filtro
-           devuelva productos; si el cliente renombra una línea en Shopify, el filtro deja
-           de matchear y hay que actualizar la URL. -->
-      <div class="lineas">
-        <div class="lineas-grupo">
-          <p class="lineas-label">Más líneas de cocina</p>
-          <div class="lineas-links">
-          <a class="linea" href="https://mipileta.com.ar/collections/todos-los-productos?filter.p.product_type=Etna+Collection" target="_blank" rel="noopener">Etna</a>
-          <a class="linea" href="https://mipileta.com.ar/collections/todos-los-productos?filter.p.product_type=Vesta+Collection" target="_blank" rel="noopener">Vesta</a>
-          <a class="linea" href="https://mipileta.com.ar/collections/todos-los-productos?filter.p.product_type=Designia+Collection" target="_blank" rel="noopener">Designia</a>
-          <a class="linea" href="https://mipileta.com.ar/collections/todos-los-productos?filter.p.product_type=Nova+collection" target="_blank" rel="noopener">Nova</a>
-          <a class="linea" href="https://mipileta.com.ar/collections/todos-los-productos?filter.p.product_type=L%C3%ADnea+Econ%C3%B3mica" target="_blank" rel="noopener">Línea Económica</a>
-          </div>
-        </div>
-        <div class="lineas-grupo">
-          <p class="lineas-label">Lavadero</p>
-          <div class="lineas-links">
-          <a class="linea" href="https://mipileta.com.ar/collections/todos-los-productos?filter.p.vendor=Lavadero" target="_blank" rel="noopener">Lavadero</a>
-          <a class="linea" href="https://mipileta.com.ar/collections/todos-los-productos?filter.p.vendor=Piletones" target="_blank" rel="noopener">Piletones</a>
-          </div>
-        </div>
       </div>
     </div>
   </div>
