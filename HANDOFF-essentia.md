@@ -100,9 +100,9 @@ shopify theme push --theme 181549990252 --store mipileta.myshopify.com \
      colores, arrancando en la **660 rose**.
    - *Instalación*: **esquema SVG en corte dibujado por código** (mesada tramada vs pileta de
      acero) con los 3 modos + link "Ver tutorial" que **cambia de video de YouTube según el modo**.
-   - *Desagüe*: foto del desagüe cuadrado con el filtro afuera (`desague-essentia.jpg`).
-     **PENDIENTE**: el cliente quiere el render en despiece apilado (tapa + filtro + cuerpo);
-     no lo tenemos como archivo. La actual sale del render oficial de la tienda.
+   - *Desagüe*: despiece apilado (tapa + filtro + cuerpo) en `desague-essentia.jpg`, recortado
+     1:1 y con marco cuadrado (`.inst-media--cuadrada`). El texto lo redactamos nosotros:
+     falta que lo valide el cliente.
 5. **"Essentia desde adentro"**: planos técnicos en acordeón.
    *(Se movió acá, antes de Accesorios: primero se termina de hablar de las piletas.)*
 6. **Complementos** (id interno `#accesorios`): eyebrow "Complementos", título "Todo lo que
