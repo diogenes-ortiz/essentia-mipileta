@@ -799,7 +799,7 @@
   <a name="signature"></a>
   <!-- hero banner (crossfade) -->
   <div class="hero" id="hero">
-  <video class="hero-video" id="hero-video" src="assets/hero-video.mp4"
+  <video class="hero-video" id="hero-video" src="assets/video-essentia.mp4"
          muted loop playsinline preload="auto" aria-hidden="true"></video>
   <div class="hero-title" role="img" aria-label="Essentia"></div>
 </div>
@@ -1613,18 +1613,33 @@
 </script>
 
 <script>
-  // Hero: primero se ve la foto y a los pocos segundos entra el video en loop.
-  // El clip ya viene recortado desde 1:52 del video original, así que reproduce
-  // desde su segundo 0 (y por eso el loop es limpio).
+  // Hero: se ve la foto hasta que la persona da señales de estar mirando (mueve el
+  // mouse, toca, scrollea). Recién ahí, y tras una espera, entra el video en loop.
   (function(){
     var v = document.getElementById('hero-video');
     if(!v) return;
-    var ESPERA = 2500;   // ms de foto antes de que aparezca el video
-    setTimeout(function(){
-      var p = v.play();
-      if(p && p.catch) p.catch(function(){});
-      v.classList.add('on');
-    }, ESPERA);
+    var ESPERA = 5000;      // ms desde el primer movimiento hasta que aparece el video
+    var DESDE  = 0.4;       // segundo del video en el que empieza
+    var listo = false;
+
+    function arrancar(){
+      if(listo) return;
+      listo = true;
+      setTimeout(function(){
+        try { v.currentTime = DESDE; } catch(e){}
+        var p = v.play();
+        if(p && p.catch) p.catch(function(){});
+        v.classList.add('on');
+      }, ESPERA);
+    }
+    /* el loop vuelve al punto de arranque, no al 0 */
+    v.addEventListener('timeupdate', function(){
+      if(v.currentTime < DESDE - 0.1 && listo) { try { v.currentTime = DESDE; } catch(e){} }
+    });
+
+    ['mousemove','touchstart','scroll','keydown','pointerdown'].forEach(function(ev){
+      addEventListener(ev, arrancar, {once:true, passive:true});
+    });
   })();
 </script>
 </body>
