@@ -164,12 +164,6 @@
     .fam-mobile{display:block;}
   }
 
-  /* ---------- video de producto sobre el fondo (sin caja; antes era el 3D) ---------- */
-  .hero-3d{position:relative;}
-  .model3d{
-    width:100%;height:76vh;min-height:460px;background:transparent;display:block;
-    margin-top:70px;outline:none;object-fit:contain;
-  }
   .hero .caption h1{
     font-family:"Raleway",sans-serif;font-weight:700;
     font-size:clamp(2.2rem,6vw,5rem);letter-spacing:.05em;margin:0;line-height:1;
@@ -716,10 +710,6 @@
     .hero::before{background-image:url('assets/essentia-hero-mobile-trio.png');background-position:center;}
     .hero-title{display:block;width:min(58vw,240px);top:3.5%;}
 
-    /* hero 3D más compacto, no domina la pantalla */
-    .hero-3d .container{padding-top:36px;}
-    .model3d{height:48vh;min-height:300px;margin-top:24px;}
-
     /* familia video */
     .familia-video{}
 
@@ -831,17 +821,8 @@
   <div class="hero-title" role="img" aria-label="Essentia"></div>
 </div>
 
-  <div class="hero-3d" id="hero-3d">
-    <div class="container" style="padding-top:60px;">
-      <h2 class="intro-h2">Diseño puro,<br><strong>funcionalidad absoluta</strong></h2>
-    </div>
-    <video
-      id="essentia-video"
-      class="model3d"
-      src="assets/video-essentia.mp4"
-      autoplay muted loop playsinline preload="auto"
-      aria-label="Pileta Essentia en video"></video>
-  </div>
+  <!-- Acá iba "Diseño puro, funcionalidad absoluta" con el video de producto.
+       Se sacó (ago 2026): es el MISMO video que ahora corre en el hero y quedaba repetido. -->
 
   <!-- la familia signature -->
   <div class="container section">
@@ -1567,25 +1548,6 @@
       p.addEventListener('click', function(){ set(p.getAttribute('data-inst')); });
     });
     set('enrasada');
-  })();
-</script>
-
-<script>
-  // El video de producto arranca con la página (mientras se ve el banner), así
-  // cuando el visitante baja hasta él ya está avanzado y no empieza de cero.
-  (function(){
-    var v = document.getElementById('essentia-video');
-    if(!v) return;
-    function arrancar(){
-      var p = v.play();
-      if(p && p.catch) p.catch(function(){ /* si el navegador lo bloquea, sigue con autoplay */ });
-    }
-    if(v.readyState >= 2) arrancar();
-    v.addEventListener('loadeddata', arrancar, {once:true});
-    v.addEventListener('canplay', arrancar, {once:true});
-    // si el navegador lo pausa por estar fuera de pantalla, lo retomamos sin reiniciar
-    document.addEventListener('visibilitychange', function(){ if(!document.hidden) arrancar(); });
-    addEventListener('scroll', function(){ if(v.paused) arrancar(); }, {passive:true, once:true});
   })();
 </script>
 

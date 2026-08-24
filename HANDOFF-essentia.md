@@ -91,30 +91,31 @@ shopify theme push --theme 181549990252 --store mipileta.myshopify.com \
    opacidad + sube 18 px + blur). Va como animación y no como transition porque la de
    entrada es `both` y le pisaría la opacidad.
    Mobile: banner vertical propio `essentia-hero-mobile-trio.png`.
-3. **"Diseño puro"**: video `video-essentia.mp4` (6,3 MB, comprimido con ffmpeg desde 70 MB).
-4. **"La familia Essentia completa"**: banner `familia-essentia-3.jpg` con el título adentro.
-5. **"Conocé cada detalle"**: dos tabs.
+   **Es el único video de la página** (ago 2026): la sección "Diseño puro, funcionalidad
+   absoluta" lo repetía y se sacó entera, con su CSS y su script.
+3. **"La familia Essentia completa"**: banner `familia-essentia-3.jpg` con el título adentro.
+4. **"Conocé cada detalle"**: dos tabs.
    - *Modelos y colores*: pills + swatches por modelo (640/670/671 = satinado+negro; 660 suma
      rose) + medida de **cuba** debajo. Ciclo automático que recorre cada modelo por todos sus
      colores, arrancando en la **660 rose**.
    - *Instalación*: **esquema SVG en corte dibujado por código** (mesada tramada vs pileta de
      acero) con los 3 modos + link "Ver tutorial" que **cambia de video de YouTube según el modo**.
-6. **"Essentia desde adentro"**: planos técnicos en acordeón.
+5. **"Essentia desde adentro"**: planos técnicos en acordeón.
    *(Se movió acá, antes de Accesorios: primero se termina de hablar de las piletas.)*
-7. **Accesorios**: 4 cards (barra, tabla, cesto, rejilla), fotos recortadas al contenido.
+6. **Accesorios**: 4 cards (barra, tabla, cesto, rejilla), fotos recortadas al contenido.
    **Cada card va al detalle del producto en Shopify** con hover (se eleva + "Ver en catálogo →"):
    barra→`barra-escurridora-compacta-50`, tabla→`tablas-de-vidrio`,
    cesto→`cestos-escurridores`, rejilla→`rejilla-flexible`.
    Cesto y rejilla **alternan satinado↔color** (a la vez, cada 2,8 s).
-8. **"Dónde comprar"**: mapa con distribuidores **DEMO** — **OCULTO** (`display:none`).
+7. **"Dónde comprar"**: mapa con distribuidores **DEMO** — **OCULTO** (`display:none`).
    Para reactivarlo: sacar el `display:none` y devolver el botón "Dónde comprar" al CTA.
-9. **CTA "Compra segura"** + garantía de 10 años + nota de Mercado Libre (texto, no botón).
-10. **Newsletter**: 4 perfiles en pills (Para mi casa · Arquitectura · Mueblería · Instalación).
+8. **CTA "Compra segura"** + garantía de 10 años + nota de Mercado Libre (texto, no botón).
+9. **Newsletter**: 4 perfiles en pills (Para mi casa · Arquitectura · Mueblería · Instalación).
     En GitHub solo valida y agradece; en Shopify se convierte en alta de cliente y **el perfil
     viaja como etiqueta** para segmentar.
-11. **"El mismo acero, en el baño"**: cierre con botón outline **"Conocé la línea Zíngara"**
+10. **"El mismo acero, en el baño"**: cierre con botón outline **"Conocé la línea Zíngara"**
     → `diogenes-ortiz.github.io/zingara-mipileta` (tiene gate, clave `zingara2026`).
-12. **Footer** + botones flotantes: catálogo (Google Drive) y WhatsApp (+54 9 11 2856-3001),
+11. **Footer** + botones flotantes: catálogo (Google Drive) y WhatsApp (+54 9 11 2856-3001),
     ambos outline; el de catálogo queda **clavado al desagüe** de la foto del hero.
 
 ## 6. Pendientes abiertos
