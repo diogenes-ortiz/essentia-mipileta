@@ -110,7 +110,7 @@
   /* la foto vive en ::before para poder animarla sin afectar al wordmark */
   .hero::before{
     content:"";position:absolute;inset:0;z-index:0;
-    background-image:url('assets/essentia-hero-trio.png');
+    background-image:url('assets/essentia-hero-trio.jpg?v=2');
     /* el % vertical sube apenas la foto para acercar las piletas al wordmark
        (con 'top' quedaban ~80px por debajo; con 20% quedan ~62px) */
     background-size:cover;background-position:center 20%;background-repeat:no-repeat;
@@ -153,6 +153,10 @@
   /* título adentro de la foto, arriba de las piletas */
   .familia-title{position:absolute;left:0;right:0;top:8%;z-index:3;text-align:center;margin:0;line-height:1.2;
     text-shadow:0 2px 14px rgba(0,0,0,.65);}
+  /* el titulo del banner va todo en el mismo peso: sin la negrita de la segunda linea.
+     Va calificado con .intro-h2 (0,2,1) para ganarle a `.intro-h2 strong{font-weight:700}`,
+     que esta mas abajo en la hoja y con la misma especificidad le ganaria por orden. */
+  .intro-h2.familia-title strong{font-weight:inherit;}
   .familia-logo{
     position:absolute;top:clamp(16px,3.2vw,42px);left:clamp(16px,3.2vw,48px);
     height:clamp(40px,5vw,74px);width:auto;z-index:2;opacity:.95;
@@ -188,6 +192,8 @@
   .slide-h3{font-size:1.6rem;font-weight:300;text-align:center;margin-bottom:30px;}
   .eyebrow{font-size:1rem;letter-spacing:.25em;color:var(--muted);text-transform:uppercase;text-align:center;}
   .lead{color:var(--muted);text-align:center;max-width:680px;margin:14px auto 0;font-weight:300;}
+  /* bajada de "Conocé cada detalle": sigue la alineación del título, que va a la izquierda */
+  .detalle-lead{color:var(--muted);font-weight:300;max-width:680px;margin:14px 0 0;line-height:1.65;}
   .center{text-align:center;}
 
   /* ---------- slider (intro fade) ---------- */
@@ -384,10 +390,10 @@
   @media(max-width:640px){
     .news-wrap{max-width:none;}
     .news-lead{font-size:.9rem;}
-    .news-label{margin-top:24px;font-size:.7rem;letter-spacing:.12em;}
+    .news-label{margin-top:24px;font-size:.78rem;letter-spacing:.12em;}
     /* 2x2 parejo: en flex quedaban 3 arriba y 1 huérfano abajo */
     .news-form .swatches{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px;}
-    .news-form .pill{padding:9px 10px;font-size:.78rem;width:100%;}
+    .news-form .pill{padding:9px 10px;font-size:.84rem;width:100%;}
     .news-row{flex-direction:column;align-items:stretch;gap:10px;margin-top:18px;}
     .news-row input,.news-row .btn{max-width:none;width:100%;}
     /* OJO: en columna el `flex:1 1 260px` de arriba pasa a ser ALTURA y el campo
@@ -475,7 +481,7 @@
     filter:drop-shadow(0 2px 6px rgba(0,0,0,.55));}
   .inst-fig .ras{stroke:rgba(255,255,255,.28);stroke-width:1;stroke-dasharray:5 6;}
   .inst-legend{display:flex;gap:22px;justify-content:center;margin-top:14px;
-    font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);}
+    font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);}
   .inst-legend span{display:inline-flex;align-items:center;gap:7px;}
   .inst-legend i{width:16px;height:9px;border-radius:2px;display:inline-block;}
   .inst-legend .lg-mesada{background:repeating-linear-gradient(45deg,#7d858f 0 2px,transparent 2px 5px);
@@ -557,7 +563,7 @@
   a.product:hover .acc-img{transform:scale(1.05);}
   .product-ir{
     display:inline-flex;align-items:center;gap:6px;margin-top:12px;
-    color:#e9ecef;font-size:.74rem;letter-spacing:.09em;text-transform:uppercase;
+    color:#e9ecef;font-size:.8rem;letter-spacing:.09em;text-transform:uppercase;
     opacity:0;transform:translateY(4px);transition:opacity .3s ease, transform .3s ease;
   }
   a.product:hover .product-ir{opacity:1;transform:none;}
@@ -703,13 +709,17 @@
     .container{padding:0 16px;}
     .section{padding-block:42px;}
     .intro-h2{font-size:1.9rem;}
+    /* "Conocé cada detalle" y "Essentia desde adentro" van alineados a la izquierda
+       por estilo inline; en pantalla angosta desentonan con el resto, que va centrado. */
+    #griferias-glow .intro-h2,.tabs3 ~ .intro-h2,.container > .intro-h2[style]{text-align:center !important;}
+    .detalle-lead{text-align:center;margin-left:auto;margin-right:auto;font-size:.95rem;}
     .eyebrow{font-size:.8rem;letter-spacing:.18em;}
     .lead{font-size:.95rem;}
 
     /* mobile: la MISMA foto y el MISMO wordmark que desktop (la vertical vieja traía
        el texto incrustado en baja calidad). El 4/5 deja entrar la cuba cobre entera. */
     .hero{aspect-ratio:941/1672;margin-top:0;}
-    .hero::before{background-image:url('assets/essentia-hero-mobile-trio.png');background-position:center;}
+    .hero::before{background-image:url('assets/essentia-hero-mobile-trio.jpg?v=2');background-position:center;}
     .hero-title{display:block;width:min(58vw,240px);top:3.5%;}
 
     /* familia video */
@@ -723,11 +733,13 @@
     .t3-panel .color-media,.t3-panel .ph{max-width:100%;margin-top:20px;}
     .swatch{width:38px;height:38px;}
 
-    /* accesorios: 2 x 2, cards compactas */
-    .acc-cards{gap:10px;}
+    /* accesorios: 2 x 2, cards compactas.
+       En mobile la grilla se alinea al .container (si no, queda 5px más ancha de
+       cada lado que el título y la nota, y se nota el desfasaje). */
+    .acc-cards{gap:10px;width:100%;max-width:100%;margin-left:0;}
     .product{padding:10px;border-radius:16px;}
     .product h3{font-size:.85rem;margin:10px 0 6px;}
-    .product p{font-size:.7rem;line-height:1.45;}
+    .product p{font-size:.82rem;line-height:1.5;}   /* .7rem = 11,2px: ilegible */
 
     /* Essentia desde adentro (planos) */
     .detail{gap:18px;}
@@ -749,6 +761,20 @@
     .t3{font-size:.82rem;letter-spacing:-0.01em;}
     .intro-h2{font-size:1.7rem;}
   }
+
+  /* ============ TACTIL ============
+     Va AL FINAL a proposito: varias de estas reglas empatan en especificidad con las
+     de mas arriba (por ejemplo la que fija los swatches de .modelos-row en 26px), asi
+     que solo ganan por orden de aparicion. Si se mueve arriba, deja de tener efecto.
+     44px es el minimo comodo para el dedo: los pills venian en 36 y los swatches en 26. */
+  @media (hover:none){
+    .pill{min-height:44px;display:inline-flex;align-items:center;justify-content:center;}
+    .swatch{width:40px;height:40px;}
+    .modelos-row [data-finish-swatches] .swatch{width:36px;height:36px;}
+    .modelos-row [data-finish-swatches]{gap:14px;}
+    .tuto-link{min-height:44px;}
+    .d-head{min-height:48px;}
+  }
 </style>
 <script>document.documentElement.classList.add('js');</script>
 </head>
@@ -756,7 +782,7 @@
 
 <!-- ================= GATE (traba con contraseña) ================= -->
 <div id="gate">
-  <img src="assets/mp-sintesis.png" alt="Mi Pileta" class="gate-logo">
+  <img src="assets/mp-sintesis.png?v=2" alt="Mi Pileta" class="gate-logo">
   <p class="gate-txt">Sitio privado — ingresá la contraseña</p>
   <div class="gate-row">
     <input id="gate-pass" type="password" placeholder="Contraseña" autocomplete="off">
@@ -802,7 +828,7 @@
 <!-- ================= TOP NAV ================= -->
 <header class="topbar">
   <div class="container inner">
-    <img class="logo" src="assets/mp-sintesis.png" alt="Logo">
+    <img class="logo" src="assets/mp-sintesis.png?v=2" alt="Logo">
     <button class="hamburger" id="hamburger" aria-label="Menú"><span></span><span></span><span></span></button>
     <nav id="topnav">
       <a href="#signature">Concepto</a>
@@ -818,8 +844,11 @@
   <a name="signature"></a>
   <!-- hero banner (crossfade) -->
   <div class="hero" id="hero">
+  <!-- preload="none": el video pesa 6,4 MB y recién se ve 6 s después de la primera
+       interacción. Se empieza a bajar en ese momento (v.load()), así no compite con
+       la foto del hero durante la carga. En mobile no se usa: lo saca el script. -->
   <video class="hero-video" id="hero-video" src="assets/video-essentia.mp4"
-         muted loop playsinline preload="auto" aria-hidden="true"></video>
+         muted loop playsinline preload="none" aria-hidden="true"></video>
   <div class="hero-title" role="img" aria-label="Essentia"></div>
 </div>
 
@@ -830,8 +859,8 @@
   <div class="container section">
     <div class="familia-banner">
       <h2 class="intro-h2 familia-title">La familia Essentia<br><strong>completa</strong></h2>
-      <img class="familia-frame active" src="assets/familia-essentia-3.jpg" alt="La familia Essentia completa">
-      <img class="familia-logo" src="assets/mp-sintesis.png" alt="Mi Pileta">
+      <img class="familia-frame active" src="assets/familia-essentia-3.jpg?v=2" alt="La familia Essentia completa">
+      <img class="familia-logo" src="assets/mp-sintesis.png?v=2" alt="Mi Pileta">
     </div>
 
   </div>
@@ -839,6 +868,7 @@
   <!-- conocé cada detalle (signature) -->
   <div class="container">
     <h2 class="intro-h2" style="text-align:left;">Conocé cada detalle</h2>
+    <p class="detalle-lead">Essentia es la línea premium de piletas de cocina de Mi Pileta: cuatro modelos, tres modos de colocación —enrasada, bajo mesada y sobre mesada— y terminaciones con tratamiento PVD, que mantiene el color para toda la vida.</p>
     <div class="tabs3">
       <div class="tabs3-bar" id="tabs3-bar">
         <button class="t3 active" data-t3="modelos">Modelos y colores</button>
@@ -863,15 +893,15 @@
           </div>
           <div class="modelos-col">
           <div class="color-media" id="modelos-media">
-            <img class="color-frame active" data-key="640S" src="assets/model-640.jpg" alt="Essentia 640 satinada">
-            <img class="color-frame" data-key="640B" src="assets/model-640B.jpg" alt="Essentia 640 negra">
-            <img class="color-frame" data-key="660S" src="assets/model-660.jpg" alt="Essentia 660 satinada">
-            <img class="color-frame" data-key="660B" src="assets/model-660B.jpg" alt="Essentia 660 negra">
-            <img class="color-frame" data-key="660R" src="assets/model-660R.jpg" alt="Essentia 660 rose">
-            <img class="color-frame" data-key="670S" src="assets/model-670.jpg" alt="Essentia 670 satinada">
-            <img class="color-frame" data-key="670B" src="assets/model-670B.jpg" alt="Essentia 670 negra">
-            <img class="color-frame" data-key="671S" src="assets/model-671.jpg" alt="Essentia 671 satinada">
-            <img class="color-frame" data-key="671B" src="assets/model-671B.jpg" alt="Essentia 671 negra">
+            <img class="color-frame active" data-key="640S" src="assets/model-640.jpg?v=2" alt="Essentia 640 satinada">
+            <img class="color-frame" data-key="640B" src="assets/model-640B.jpg?v=2" alt="Essentia 640 negra">
+            <img class="color-frame" data-key="660S" src="assets/model-660.jpg?v=2" alt="Essentia 660 satinada">
+            <img class="color-frame" data-key="660B" src="assets/model-660B.jpg?v=2" alt="Essentia 660 negra">
+            <img class="color-frame" data-key="660R" src="assets/model-660R.jpg?v=2" alt="Essentia 660 rose">
+            <img class="color-frame" data-key="670S" src="assets/model-670.jpg?v=2" alt="Essentia 670 satinada">
+            <img class="color-frame" data-key="670B" src="assets/model-670B.jpg?v=2" alt="Essentia 670 negra">
+            <img class="color-frame" data-key="671S" src="assets/model-671.jpg?v=2" alt="Essentia 671 satinada">
+            <img class="color-frame" data-key="671B" src="assets/model-671B.jpg?v=2" alt="Essentia 671 negra">
           </div>
           </div>
           </div>
@@ -946,7 +976,7 @@
         <div class="t3-panel" data-t3="desague">
           <p>Desagüe cuadrado, en línea con la geometría de la pileta y en el mismo acero inoxidable. Son tres piezas: la tapa, el filtro que se retira para limpiarlo y el cuerpo del desagüe.</p>
           <div class="inst-media inst-media--cuadrada">
-            <img src="assets/desague-essentia.jpg?v=2" alt="Despiece del desagüe de Essentia: tapa, filtro y cuerpo" loading="lazy">
+            <img src="assets/desague-essentia.jpg?v=3" alt="Despiece del desagüe de Essentia: tapa, filtro y cuerpo" loading="lazy">
           </div>
         </div>
       </div>
@@ -1013,21 +1043,21 @@
       <!-- barra: es la COMPACTA 50 satinada. Se identificó contando ranuras contra las
            fotos de la tienda: la nuestra tiene 7 por panel, la "60" tiene 8. -->
       <a class="product" href="https://mipileta.com.ar/products/barra-escurridora-compacta-50" target="_blank" rel="noopener">
-        <div class="acc-img"><img src="assets/acc-barra.png?v=3" alt="Barra escurridora"></div>
+        <div class="acc-img"><img src="assets/acc-barra.webp?v=1" alt="Barra escurridora"></div>
         <h3>Barra escurridora</h3>
         <p>Compartimientos desmontables para un escurrido eficiente y una cocina siempre ordenada.</p>
         <span class="product-ir">Ver en catálogo <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7"/></svg></span>
       </a>
       <a class="product" href="https://mipileta.com.ar/products/tablas-de-vidrio" target="_blank" rel="noopener">
-        <div class="acc-img"><img src="assets/acc-tabla.png?v=4" alt="Tabla de vidrio"></div>
+        <div class="acc-img"><img src="assets/acc-tabla.webp?v=1" alt="Tabla de vidrio"></div>
         <h3>Tabla de vidrio</h3>
         <p>Superficie de trabajo que se integra a la pileta para ganar espacio y practicidad al cocinar.</p>
         <span class="product-ir">Ver en catálogo <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7"/></svg></span>
       </a>
       <a class="product" href="https://mipileta.com.ar/products/cestos-escurridores" target="_blank" rel="noopener">
         <div class="acc-img acc-dual">
-          <img class="acc-frame on" src="assets/acc-cesto.png?v=3" alt="Cesto escurridor satinado">
-          <img class="acc-frame" src="assets/acc-cesto-rose.png?v=3" alt="Cesto escurridor rose">
+          <img class="acc-frame on" src="assets/acc-cesto.webp?v=1" alt="Cesto escurridor satinado">
+          <img class="acc-frame" src="assets/acc-cesto-rose.webp?v=1" alt="Cesto escurridor rose">
         </div>
         <h3>Cesto escurridor</h3>
         <p>Cesto práctico para escurrir y secar utensilios, manteniendo cada cosa en su lugar.</p>
@@ -1035,8 +1065,8 @@
       </a>
       <a class="product" href="https://mipileta.com.ar/products/rejilla-flexible" target="_blank" rel="noopener">
         <div class="acc-img acc-dual">
-          <img class="acc-frame on" src="assets/acc-rejilla.png?v=3" alt="Rejilla flexible satinada">
-          <img class="acc-frame" src="assets/acc-rejilla-negra.png?v=3" alt="Rejilla flexible negra">
+          <img class="acc-frame on" src="assets/acc-rejilla.webp?v=1" alt="Rejilla flexible satinada">
+          <img class="acc-frame" src="assets/acc-rejilla-negra.webp?v=1" alt="Rejilla flexible negra">
         </div>
         <h3>Rejilla flexible</h3>
         <p>Se enrolla sobre la pileta para escurrir y secar, y se guarda en un cajón.</p>
@@ -1473,13 +1503,13 @@
        clavado aunque la foto se recorte en mobile o cambie la barra de scroll. */
     // medidos sobre cada foto del hero: el tapon NO cae en el centro exacto
     var FOTOS = {
-      'essentia-hero-trio.png':        {w:1672, h:941,  tapon:831},
-      'essentia-hero-mobile-trio.png': {w:941,  h:1672, tapon:469.5}
+      'essentia-hero-trio.jpg':        {w:1672, h:941,  tapon:831},
+      'essentia-hero-mobile-trio.jpg': {w:941,  h:1672, tapon:469.5}
     };
     function fotoDelHero(hero){
       var bg = getComputedStyle(hero, '::before').backgroundImage || '';
       for (var k in FOTOS) if (bg.indexOf(k) !== -1) return FOTOS[k];
-      return FOTOS['essentia-hero-trio.png'];
+      return FOTOS['essentia-hero-trio.jpg'];
     }
     function alinearBoton(){
       var hero = document.getElementById('hero');
@@ -1646,6 +1676,9 @@
   (function(){
     var v = document.getElementById('hero-video');
     if(!v) return;
+    /* En celular el hero es vertical y el video 16:9: se veía una franja del 32% del
+       ancho, ampliada. Se saca del DOM para que ni siquiera se descargue. */
+    if (matchMedia('(max-width:640px)').matches){ v.removeAttribute('src'); v.remove(); return; }
     var ESPERA = 6000;      // ms desde el primer movimiento hasta que aparece el video
     var DESDE  = 4.4;       // seg. del video: en 4.0 hay un fundido a negro; la primera pileta se ve desde 4.4
     var listo = false;
@@ -1653,6 +1686,7 @@
     function arrancar(){
       if(listo) return;
       listo = true;
+      try { v.load(); } catch(e){}   // con preload="none" hay que pedirlo a mano
       setTimeout(function(){
         try { v.currentTime = DESDE; } catch(e){}
         var p = v.play();

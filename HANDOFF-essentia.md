@@ -125,6 +125,35 @@ shopify theme push --theme 181549990252 --store mipileta.myshopify.com \
 11. **Footer** + botones flotantes: catálogo (Google Drive) y WhatsApp (+54 9 11 2856-3001),
     ambos outline; el de catálogo queda **clavado al desagüe** de la foto del hero.
 
+## Mobile (revision ago 2026)
+
+La pagina bajaba **18 MB** en celular. Ahora baja **1,5 MB**. Que se hizo:
+
+- **El video NO va en mobile.** El hero de celular es vertical (941x1672) y el video es
+  16:9: con object-fit:cover se veia apenas el **32% del ancho**, muy ampliado. El script
+  saca el <video> del DOM cuando matchMedia("(max-width:640px)") da true, asi ni se descarga
+  (6,3 MB). En desktop sigue igual.
+- **preload="none" + v.load() en la primera interaccion.** El video recien se ve 6 s despues,
+  asi que no tiene sentido bajarlo durante la carga inicial compitiendo con la foto del hero.
+- **Imagenes reducidas: 12,4 MB -> 2,4 MB.** Los originales quedaron en `Cloud/assets-originales/`
+  (fuera del repo). Detalle:
+  - `model-*.jpg` x9: 3072px -> **1200px** (se muestran a 560px como maximo).
+  - `acc-*.png` x6 -> **`acc-*.webp`** (1493 KB -> 449 KB). Mantienen transparencia.
+  - `familia-essentia-3.jpg`: 2480px -> 1800px (3054 KB -> 190 KB).
+  - `essentia-hero-trio.png` -> **`.jpg`** (782 -> 76 KB) y `essentia-hero-mobile-trio.png`
+    -> **`.jpg`** (1094 -> 106 KB). Mismas dimensiones, solo cambia el formato.
+    **OJO:** al renombrarlos hay que tocar las claves del objeto `FOTOS` (el que alinea el
+    boton de catalogo al tapon). Sus `w`/`h`/`tapon` son un sistema de coordenadas, no
+    pixeles reales: al redimensionar o recomprimir NO se tocan.
+  - `mp-sintesis.png`: 2000px -> 160px (se muestra a 33px).
+- **Areas tactiles de 44px**: los pills estaban en 36 y los swatches en 26.
+  El bloque `@media (hover:none)` va **al final del <style>** a proposito: empata en
+  especificidad con reglas de mas arriba y solo gana por orden de aparicion.
+- **Textos legibles**: la descripcion de las cards estaba en 11,2px (`.7rem`), ahora `.82rem`.
+- **La grilla de complementos alinea con el .container** (antes sobresalia 5px de cada lado).
+- **Titulos centrados en mobile**: "Conoce cada detalle" y "Essentia desde adentro" van a la
+  izquierda por estilo inline y en pantalla angosta desentonaban.
+
 ## 6. Pendientes abiertos
 
 **Esperando respuesta del cliente**
