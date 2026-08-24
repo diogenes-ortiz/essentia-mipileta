@@ -64,14 +64,23 @@ shopify theme push --theme 181549990252 --store mipileta.myshopify.com \
    timers congelados, viewport en 0, resize que no dispara. Verificar por DOM
    (`getBoundingClientRect`, `getComputedStyle`) y forzar `getAnimations().finish()`.
 8. Al reemplazar una imagen con el mismo nombre, **subir el `?v=N`** (cache-bust).
+9. **`flex-basis` cambia de eje al pasar a columna**: `flex:1 1 260px` pensado como ANCHO se
+   vuelve ALTURA cuando el media query pone `flex-direction:column`. Así el campo del
+   newsletter quedaba de 260 px de alto en mobile. Se corrige con `flex:0 0 auto`.
+10. **Inputs en mobile: `font-size:16px` exactos.** Con menos, iOS hace zoom al enfocar.
 
 ## 5. Estado de cada sección
 
 1. **Nav** sticky: Concepto · Modelos · Compra segura · Contacto (`scroll-margin-top:88px`).
+   **Contacto abre WhatsApp** (antes iba al mapa, que quedó oculto); el href se arma en el
+   mismo script de `WA_NUMERO`, así el número está en un solo lugar.
 2. **Hero**: foto `essentia-hero-trio.png` + wordmark oficial (máscara CSS). **Video encima**
    que arranca **6 s después del primer movimiento de mouse** (o touch/scroll/teclado),
    **desde el segundo 4.4** (en 4.0 el video está en fundido a negro), en loop que vuelve a
    4.4. Constantes `ESPERA` y `DESDE` en el script del final.
+   **Al entrar el video el wordmark se difumina y se va** (animación `ess-title-out`, 1,2 s:
+   opacidad + sube 18 px + blur). Va como animación y no como transition porque la de
+   entrada es `both` y le pisaría la opacidad.
    Mobile: banner vertical propio `essentia-hero-mobile-trio.png`.
 3. **"Diseño puro"**: video `video-essentia.mp4` (6,3 MB, comprimido con ffmpeg desde 70 MB).
 4. **"La familia Essentia completa"**: banner `familia-essentia-3.jpg` con el título adentro.
@@ -81,25 +90,31 @@ shopify theme push --theme 181549990252 --store mipileta.myshopify.com \
      colores, arrancando en la **660 rose**.
    - *Instalación*: **esquema SVG en corte dibujado por código** (mesada tramada vs pileta de
      acero) con los 3 modos + link "Ver tutorial" que **cambia de video de YouTube según el modo**.
-6. **Accesorios**: 4 cards (barra, tabla, cesto, rejilla), fotos recortadas al contenido.
-   **Cada card es un link a la tienda** con hover (se eleva + "Ver en la tienda →").
+6. **"Essentia desde adentro"**: planos técnicos en acordeón.
+   *(Se movió acá, antes de Accesorios: primero se termina de hablar de las piletas.)*
+7. **Accesorios**: 4 cards (barra, tabla, cesto, rejilla), fotos recortadas al contenido.
+   **Cada card va al detalle del producto en Shopify** con hover (se eleva + "Ver en catálogo →"):
+   barra→`barra-escurridora-compacta-50`, tabla→`tablas-de-vidrio`,
+   cesto→`cestos-escurridores`, rejilla→`rejilla-flexible`.
    Cesto y rejilla **alternan satinado↔color** (a la vez, cada 2,8 s).
-7. **"Essentia desde adentro"**: planos técnicos en acordeón.
-8. **"Dónde comprar"**: mapa con distribuidores **DEMO**.
+8. **"Dónde comprar"**: mapa con distribuidores **DEMO** — **OCULTO** (`display:none`).
+   Para reactivarlo: sacar el `display:none` y devolver el botón "Dónde comprar" al CTA.
 9. **CTA "Compra segura"** + garantía de 10 años + nota de Mercado Libre (texto, no botón).
 10. **Newsletter**: 4 perfiles en pills (Para mi casa · Arquitectura · Mueblería · Instalación).
     En GitHub solo valida y agradece; en Shopify se convierte en alta de cliente y **el perfil
     viaja como etiqueta** para segmentar.
-11. **Footer** + botones flotantes: catálogo (Google Drive) y WhatsApp (+54 9 11 2856-3001),
+11. **"El mismo acero, en el baño"**: cierre con botón outline **"Conocé la línea Zíngara"**
+    → `diogenes-ortiz.github.io/zingara-mipileta` (tiene gate, clave `zingara2026`).
+12. **Footer** + botones flotantes: catálogo (Google Drive) y WhatsApp (+54 9 11 2856-3001),
     ambos outline; el de catálogo queda **clavado al desagüe** de la foto del hero.
 
 ## 6. Pendientes abiertos
 
 **Esperando respuesta del cliente**
-- [ ] **Cuál de las 4 barras escurridoras** de la tienda es la de la foto (compacta 50, 50 Black,
-      60, 60 Black). Hoy esa card va a la colección de accesorios.
-- [ ] **La rejilla flexible no existe como producto** en la tienda → su card también va a la
-      colección. Si la dan de alta, enlazarla.
+- [x] ~~Cuál de las 4 barras escurridoras es la de la foto~~ → es la **compacta 50 satinada**
+      (se identificó contando ranuras: la nuestra tiene 7 por panel, la 60 tiene 8). Confirmar
+      con el cliente si aparece una foto que lo contradiga.
+- [x] ~~La rejilla flexible no existe como producto~~ → **sí existe** (`rejilla-flexible`), ya enlazada.
 - [ ] ¿Reponer el **dosificador**? Se sacó porque no estaba entre las fotos nuevas.
 - [ ] **Publicar la página de Shopify** (hoy oculta). Al publicarla: verificar en vivo y hacer
       una **suscripción de prueba** al newsletter para confirmar el alta con etiqueta.
@@ -107,9 +122,12 @@ shopify theme push --theme 181549990252 --store mipileta.myshopify.com \
 **Técnicos**
 - [ ] **Hero en alta resolución** (el actual es 1672px, se ablanda en 2K/4K). Ideal ~3344x1630,
       JPG/WebP, piletas abajo y tercio superior negro.
-- [ ] **Distribuidores reales** del mapa (hoy son de ejemplo: Palermo, Belgrano, Caballito, Recoleta).
+- [ ] **Distribuidores reales** del mapa (hoy son de ejemplo: Palermo, Belgrano, Caballito,
+      Recoleta). **La sección está OCULTA** (`display:none`) hasta tener los datos reales.
 - [ ] **Barra escurridora en negro** con el MISMO encuadre que la satinada, para que también alterne.
 - [ ] Link real de **Mercado Libre** (hoy es una nota de texto porque no hay a dónde mandar).
+- [ ] El botón final **"Conocé la línea Zíngara"** apunta a GitHub Pages, que tiene gate
+      (clave `zingara2026`). Cuando Zíngara esté en Shopify, cambiar la URL.
 
 ## 7. Herramientas útiles ya instaladas
 
