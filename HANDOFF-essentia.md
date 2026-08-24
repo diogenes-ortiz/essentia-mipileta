@@ -113,7 +113,8 @@ shopify theme push --theme 181549990252 --store mipileta.myshopify.com \
 7. **"Dónde comprar"**: mapa con distribuidores **DEMO** — **OCULTO** (`display:none`).
    Para reactivarlo: sacar el `display:none` y devolver el botón "Dónde comprar" al CTA.
 8. **CTA "Compra segura"** + garantía de 10 años + nota de Mercado Libre (texto, no botón).
-9. **Newsletter**: 4 perfiles en pills (Para mi casa · Arquitectura · Mueblería · Instalación).
+9. **Newsletter**: título "Recibí las últimas novedades" (general, no "Novedades de Essentia").
+   4 perfiles en pills (Para mi casa · Arquitectura · Mueblería · Instalación).
     En GitHub solo valida y agradece; en Shopify se convierte en alta de cliente y **el perfil
     viaja como etiqueta** para segmentar.
 10. **"El mismo acero, en el baño"**: cierre con botón outline **"Conocé la línea Zíngara"**
