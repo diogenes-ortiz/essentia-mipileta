@@ -386,8 +386,19 @@
   .news-msg.ok{color:#cfe8d4;}
   .news-msg.bad{color:#e08a8a;}
   @media(max-width:640px){
-    .news-row{flex-direction:column;align-items:stretch;}
+    .news-wrap{max-width:none;}
+    .news-lead{font-size:.9rem;}
+    .news-label{margin-top:24px;font-size:.7rem;letter-spacing:.12em;}
+    /* 2x2 parejo: en flex quedaban 3 arriba y 1 huérfano abajo */
+    .news-form .swatches{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px;}
+    .news-form .pill{padding:9px 10px;font-size:.78rem;width:100%;}
+    .news-row{flex-direction:column;align-items:stretch;gap:10px;margin-top:18px;}
     .news-row input,.news-row .btn{max-width:none;width:100%;}
+    /* OJO: en columna el `flex:1 1 260px` de arriba pasa a ser ALTURA y el campo
+       quedaba de 260px de alto. Hay que devolverle base automática. */
+    .news-row input{flex:0 0 auto;padding:14px 20px;font-size:16px;}
+    /* 16px exactos: con menos, iOS hace zoom al enfocar y descuadra la página. */
+    .news-msg{font-size:.82rem;}
   }
 
   /* ---------- botones flotantes (z-index < 9999 del gate) ---------- */
@@ -652,6 +663,21 @@
   /* ...y unos ms después la pileta con zoom-in */
   html.js .hero::before{animation:ess-hero-zoom 1.6s cubic-bezier(.22,.61,.36,1) .5s both;}
 
+  /* Cuando entra el video, el wordmark se difumina y se va: el video trae su propio
+     encuadre y el "Essentia" fijo encima quedaba peleado con la imagen.
+     Va como ANIMACIÓN (no transition) porque la de entrada es `both` y le pisaría
+     la opacidad a cualquier transición sobre la misma propiedad.
+     Las dos listas de filter tienen las MISMAS funciones para que interpole. */
+  @keyframes ess-title-out{
+    from{opacity:1;transform:translateX(-50%) translateY(0) scale(1);
+         filter:drop-shadow(0 1px 1px rgba(255,255,255,.12)) drop-shadow(0 2px 8px rgba(0,0,0,.5)) blur(0px);}
+    to{opacity:0;transform:translateX(-50%) translateY(-18px) scale(1.04);
+       filter:drop-shadow(0 1px 1px rgba(255,255,255,0)) drop-shadow(0 2px 8px rgba(0,0,0,0)) blur(7px);}
+  }
+  /* (0,3,1) para ganarle a `html.js .hero-title`, que trae la animación de entrada */
+  html.js .hero-title.fuera{animation:ess-title-out 1.2s cubic-bezier(.4,0,.2,1) forwards;}
+  .hero-title.fuera{opacity:0;pointer-events:none;}
+
   /* revelado suave de secciones al scrollear */
   html.js .ess-reveal{opacity:0;transform:translateY(28px);
     transition:opacity .9s cubic-bezier(.22,.61,.36,1), transform .9s cubic-bezier(.22,.61,.36,1);}
@@ -659,6 +685,7 @@
 
   @media (prefers-reduced-motion: reduce){
     html.js .topbar,html.js .hero::before,html.js .hero-title{animation:none;}
+    html.js .hero-title.fuera{animation:none;opacity:0;}
     html.js .ess-reveal{opacity:1;transform:none;transition:none;}
     .pvd-note span{animation:none;}
     .inst-fig{transition:opacity .01s linear;transform:none;}
@@ -789,7 +816,7 @@
       <a href="#signature">Concepto</a>
       <a href="#griferias-glow">Modelos</a>
       <a href="#compra-segura">Compra segura</a>
-      <a href="#donde-comprar">Contacto</a>
+      <a href="#compra-segura" id="nav-contacto">Contacto</a>
     </nav>
   </div>
 </header>
@@ -932,51 +959,6 @@
     </div>
   </div>
 
-  <!-- accesorios -->
-  <div class="container section">
-    <p class="eyebrow">Accesorios</p>
-    <h2 class="intro-h2" style="margin-top:14px;">Todo lo que necesitás,<br><strong>incluido</strong></h2>
-
-    <div class="acc-cards">
-      <a class="product" href="https://mipileta.com.ar/collections/todos-los-productos?filter.p.vendor=Accesorios" target="_blank" rel="noopener">
-        <div class="acc-img"><img src="assets/acc-barra.png?v=3" alt="Barra escurridora"></div>
-        <h3>Barra escurridora</h3>
-        <p>Compartimientos desmontables para un escurrido eficiente y una cocina siempre ordenada.</p>
-        <span class="product-ir">Ver en la tienda <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7"/></svg></span>
-      </a>
-      <a class="product" href="https://mipileta.com.ar/products/tablas-de-vidrio" target="_blank" rel="noopener">
-        <div class="acc-img"><img src="assets/acc-tabla.png?v=4" alt="Tabla de vidrio"></div>
-        <h3>Tabla de vidrio</h3>
-        <p>Superficie de trabajo que se integra a la pileta para ganar espacio y practicidad al cocinar.</p>
-        <span class="product-ir">Ver en la tienda <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7"/></svg></span>
-      </a>
-      <a class="product" href="https://mipileta.com.ar/products/cestos-escurridores" target="_blank" rel="noopener">
-        <div class="acc-img acc-dual">
-          <img class="acc-frame on" src="assets/acc-cesto.png?v=3" alt="Cesto escurridor satinado">
-          <img class="acc-frame" src="assets/acc-cesto-rose.png?v=3" alt="Cesto escurridor rose">
-        </div>
-        <h3>Cesto escurridor</h3>
-        <p>Cesto práctico para escurrir y secar utensilios, manteniendo cada cosa en su lugar.</p>
-        <span class="product-ir">Ver en la tienda <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7"/></svg></span>
-      </a>
-      <a class="product" href="https://mipileta.com.ar/collections/todos-los-productos?filter.p.vendor=Accesorios" target="_blank" rel="noopener">
-        <div class="acc-img acc-dual">
-          <img class="acc-frame on" src="assets/acc-rejilla.png?v=3" alt="Rejilla flexible satinada">
-          <img class="acc-frame" src="assets/acc-rejilla-negra.png?v=3" alt="Rejilla flexible negra">
-        </div>
-        <h3>Rejilla flexible</h3>
-        <p>Se enrolla sobre la pileta para escurrir y secar, y se guarda en un cajón.</p>
-        <span class="product-ir">Ver en la tienda <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7"/></svg></span>
-      </a>
-    </div>
-    </div>
-    </div>
-
-    <p class="ml-nota">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7.2"/><path d="M16.5 16.5 21 21"/></svg>
-      <span>Encontranos en Mercado Libre a través de nuestros distribuidores.</span>
-    </p>
-  </div>
 </section>
 
 <!-- ================= LOS MODELOS ================= -->
@@ -1024,8 +1006,60 @@
   </div>
 </section>
 
+<!-- ================= ACCESORIOS ================= -->
+<!-- va DESPUÉS de los planos: primero se termina de hablar de las piletas -->
+<section class="section" id="accesorios">
+  <div class="container">
+    <p class="eyebrow">Accesorios</p>
+    <h2 class="intro-h2" style="margin-top:14px;">Todo lo que necesitás,<br><strong>incluido</strong></h2>
+
+    <div class="acc-cards">
+      <!-- barra: es la COMPACTA 50 satinada. Se identificó contando ranuras contra las
+           fotos de la tienda: la nuestra tiene 7 por panel, la "60" tiene 8. -->
+      <a class="product" href="https://mipileta.com.ar/products/barra-escurridora-compacta-50" target="_blank" rel="noopener">
+        <div class="acc-img"><img src="assets/acc-barra.png?v=3" alt="Barra escurridora"></div>
+        <h3>Barra escurridora</h3>
+        <p>Compartimientos desmontables para un escurrido eficiente y una cocina siempre ordenada.</p>
+        <span class="product-ir">Ver en catálogo <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a class="product" href="https://mipileta.com.ar/products/tablas-de-vidrio" target="_blank" rel="noopener">
+        <div class="acc-img"><img src="assets/acc-tabla.png?v=4" alt="Tabla de vidrio"></div>
+        <h3>Tabla de vidrio</h3>
+        <p>Superficie de trabajo que se integra a la pileta para ganar espacio y practicidad al cocinar.</p>
+        <span class="product-ir">Ver en catálogo <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a class="product" href="https://mipileta.com.ar/products/cestos-escurridores" target="_blank" rel="noopener">
+        <div class="acc-img acc-dual">
+          <img class="acc-frame on" src="assets/acc-cesto.png?v=3" alt="Cesto escurridor satinado">
+          <img class="acc-frame" src="assets/acc-cesto-rose.png?v=3" alt="Cesto escurridor rose">
+        </div>
+        <h3>Cesto escurridor</h3>
+        <p>Cesto práctico para escurrir y secar utensilios, manteniendo cada cosa en su lugar.</p>
+        <span class="product-ir">Ver en catálogo <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a class="product" href="https://mipileta.com.ar/products/rejilla-flexible" target="_blank" rel="noopener">
+        <div class="acc-img acc-dual">
+          <img class="acc-frame on" src="assets/acc-rejilla.png?v=3" alt="Rejilla flexible satinada">
+          <img class="acc-frame" src="assets/acc-rejilla-negra.png?v=3" alt="Rejilla flexible negra">
+        </div>
+        <h3>Rejilla flexible</h3>
+        <p>Se enrolla sobre la pileta para escurrir y secar, y se guarda en un cajón.</p>
+        <span class="product-ir">Ver en catálogo <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7"/></svg></span>
+      </a>
+    </div>
+
+    <p class="ml-nota">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7.2"/><path d="M16.5 16.5 21 21"/></svg>
+      <span>Encontranos en Mercado Libre a través de nuestros distribuidores.</span>
+    </p>
+  </div>
+</section>
+
 <!-- ================= DÓNDE COMPRAR ================= -->
-<section id="donde-comprar" class="section">
+<!-- OCULTO a pedido del cliente (ago 2026): los distribuidores del mapa son de ejemplo.
+     Para volver a mostrarlo, sacar el display:none y devolver el botón "Dónde comprar"
+     del CTA de compra segura. -->
+<section id="donde-comprar" class="section" style="display:none;" aria-hidden="true">
   <a name="donde-comprar"></a>
   <div class="container">
     <h2 class="intro-h2">Elegí tu <strong>punto de venta</strong> más cercano</h2>
@@ -1068,9 +1102,6 @@
       <h2 class="intro-h2">Compra <strong>segura</strong></h2>
       <p style="margin-top:20px;color:#e9ecef;font-size:1rem;font-weight:600;">Garantía de 10 Años</p>
       <p style="margin-top:8px;color:var(--muted);font-size:.9rem;font-weight:300;line-height:1.65;">Se cubre a sus piletas y mesadas de acero inoxidable AISI 304-18/8 y 18/10 mediante esta GARANTÍA indiscutible de defectos de fabricación, en usos normales, por el término de 10 años.</p>
-      <div class="cta-row">
-        <a class="btn btn-outline" href="#donde-comprar">Dónde comprar</a>
-      </div>
       <p class="ml-nota">
         <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7.2"/><path d="M16.5 16.5 21 21"/></svg>
         <span>Encontranos en Mercado Libre a través de nuestros distribuidores.</span>
@@ -1106,6 +1137,20 @@
         <p class="news-msg" id="news-msg" role="status" aria-live="polite"></p>
       </form>
       <!-- NEWSLETTER:FORM-FIN -->
+    </div>
+  </div>
+</section>
+
+<!-- ================= LA OTRA LÍNEA ================= -->
+<section class="section" id="otra-linea">
+  <div class="container" style="text-align:center;">
+    <div style="display:inline-block;max-width:520px;">
+      <p class="eyebrow">Mi Pileta</p>
+      <h2 class="intro-h2" style="margin-top:14px;">El mismo acero,<br><strong>en el baño</strong></h2>
+      <p style="margin-top:18px;color:var(--muted);font-size:.95rem;font-weight:300;line-height:1.65;">Zíngara es la línea de bachas de baño: el mismo acero inoxidable y las mismas terminaciones PVD que Essentia, para el otro ambiente de la casa.</p>
+      <div class="cta-row" style="margin-top:26px;">
+        <a class="btn btn-outline" href="https://diogenes-ortiz.github.io/zingara-mipileta/" target="_blank" rel="noopener">Conocé la línea Zíngara</a>
+      </div>
     </div>
   </div>
 </section>
@@ -1474,8 +1519,14 @@
     var WA_TEXTO  = '¡Hola! Tengo una pregunta sobre una pileta';
     var btn = document.getElementById('float-wsp');
     if(!btn || !WA_NUMERO) return;
-    btn.href = 'https://wa.me/' + WA_NUMERO + '?text=' + encodeURIComponent(WA_TEXTO);
+    var url = 'https://wa.me/' + WA_NUMERO + '?text=' + encodeURIComponent(WA_TEXTO);
+    btn.href = url;
     btn.style.display = 'flex';
+    /* El "Contacto" del nav apuntaba al mapa de distribuidores; con el mapa oculto
+       manda al mismo WhatsApp. Se resuelve acá para no repetir el número.
+       Si WA_NUMERO se vacía, el link se queda en #compra-segura (su href del HTML). */
+    var navc = document.getElementById('nav-contacto');
+    if(navc){ navc.href = url; navc.target = '_blank'; navc.rel = 'noopener'; }
   })();
 </script>
 
@@ -1630,6 +1681,9 @@
         var p = v.play();
         if(p && p.catch) p.catch(function(){});
         v.classList.add('on');
+        /* el wordmark se difumina y se va: encima del video no queda bien */
+        var wm = document.querySelector('.hero-title');
+        if(wm) wm.classList.add('fuera');
       }, ESPERA);
     }
     /* el loop vuelve al punto de arranque, no al 0 */
