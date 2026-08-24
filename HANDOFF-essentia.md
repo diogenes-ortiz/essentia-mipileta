@@ -102,7 +102,10 @@ shopify theme push --theme 181549990252 --store mipileta.myshopify.com \
      acero) con los 3 modos + link "Ver tutorial" que **cambia de video de YouTube según el modo**.
 5. **"Essentia desde adentro"**: planos técnicos en acordeón.
    *(Se movió acá, antes de Accesorios: primero se termina de hablar de las piletas.)*
-6. **Accesorios**: 4 cards (barra, tabla, cesto, rejilla), fotos recortadas al contenido.
+6. **Complementos** (id interno `#accesorios`): eyebrow "Complementos", título "Todo lo que
+   necesitás, a mano". **Nunca decir "incluido"** (ago 2026): hacía pensar que venían de
+   regalo con la pileta, y se venden aparte.
+   4 cards (barra, tabla, cesto, rejilla), fotos recortadas al contenido.
    **Cada card va al detalle del producto en Shopify** con hover (se eleva + "Ver en catálogo →"):
    barra→`barra-escurridora-compacta-50`, tabla→`tablas-de-vidrio`,
    cesto→`cestos-escurridores`, rejilla→`rejilla-flexible`.
