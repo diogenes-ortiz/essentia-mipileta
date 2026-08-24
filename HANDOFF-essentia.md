@@ -94,12 +94,15 @@ shopify theme push --theme 181549990252 --store mipileta.myshopify.com \
    **Es el único video de la página** (ago 2026): la sección "Diseño puro, funcionalidad
    absoluta" lo repetía y se sacó entera, con su CSS y su script.
 3. **"La familia Essentia completa"**: banner `familia-essentia-3.jpg` con el título adentro.
-4. **"Conocé cada detalle"**: dos tabs.
+4. **"Conocé cada detalle"**: tres tabs.
    - *Modelos y colores*: pills + swatches por modelo (640/670/671 = satinado+negro; 660 suma
      rose) + medida de **cuba** debajo. Ciclo automático que recorre cada modelo por todos sus
      colores, arrancando en la **660 rose**.
    - *Instalación*: **esquema SVG en corte dibujado por código** (mesada tramada vs pileta de
      acero) con los 3 modos + link "Ver tutorial" que **cambia de video de YouTube según el modo**.
+   - *Desagüe*: foto del desagüe cuadrado con el filtro afuera (`desague-essentia.jpg`).
+     **PENDIENTE**: el cliente quiere el render en despiece apilado (tapa + filtro + cuerpo);
+     no lo tenemos como archivo. La actual sale del render oficial de la tienda.
 5. **"Essentia desde adentro"**: planos técnicos en acordeón.
    *(Se movió acá, antes de Accesorios: primero se termina de hablar de las piletas.)*
 6. **Complementos** (id interno `#accesorios`): eyebrow "Complementos", título "Todo lo que

@@ -206,7 +206,7 @@
 
   /* Conocé cada detalle — una línea con 3 opciones, panel desplegable */
   .tabs3{max-width:760px;margin:30px auto 0;}
-  .tabs3-bar{display:grid;grid-template-columns:repeat(2,1fr);border-bottom:1px solid var(--line);}
+  .tabs3-bar{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--line);}
   .t3{
     width:100%;background:none;border:0;border-bottom:2px solid transparent;margin-bottom:-1px;
     color:#9a9a9a;font-family:inherit;font-size:1.15rem;font-weight:400;
@@ -214,7 +214,7 @@
   }
   .t3:hover{color:#fff;}
   .t3.active{color:#fff;border-bottom-color:#fff;}
-  @media(max-width:600px){.t3{font-size:.95rem;padding:14px 14px;}}
+  @media(max-width:600px){.t3{font-size:.95rem;padding:14px 6px;line-height:1.25;}}
   .tabs3-panels{margin-top:34px;}
   .t3-panel{display:none;text-align:center;}
   .t3-panel.active{display:block;animation:fade .4s ease;}
@@ -841,6 +841,7 @@
       <div class="tabs3-bar" id="tabs3-bar">
         <button class="t3 active" data-t3="modelos">Modelos y colores</button>
         <button class="t3" data-t3="instalacion">Modos de instalación</button>
+        <button class="t3" data-t3="desague">Desagüe</button>
       </div>
       <div class="tabs3-panels">
         <div class="t3-panel active" data-t3="modelos">
@@ -934,6 +935,16 @@
               <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10.2"/><path d="M10 8.4 16 12l-6 3.6Z"/></svg>
               <span>Ver tutorial de instalación</span>
             </a>
+          </div>
+        </div>
+
+        <!-- Desagüe. Reusa .inst-media, que tenía el CSS escrito pero había quedado
+             sin uso (antes llevaba assets/instalacion.jpg). La foto ya viene recortada
+             a 4:3, que es el aspect-ratio que fuerza esa regla: no recorta nada. -->
+        <div class="t3-panel" data-t3="desague">
+          <p>Desagüe cuadrado, en línea con la geometría de la pileta y en el mismo acero inoxidable. El filtro se retira para limpiarlo y vuelve a su lugar.</p>
+          <div class="inst-media">
+            <img src="assets/desague-essentia.jpg?v=1" alt="Desagüe cuadrado de Essentia con el filtro retirado" loading="lazy">
           </div>
         </div>
       </div>
