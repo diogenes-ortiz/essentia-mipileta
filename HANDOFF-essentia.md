@@ -13,7 +13,7 @@ Landing de la **línea Essentia** (piletas de cocina de acero inox de Mi Pileta)
 | Assets | `Cloud\assets\` |
 | Versión GitHub Pages | https://diogenes-ortiz.github.io/essentia-mipileta/ — **clave `essentia2026`** |
 | Carpeta del repo | `Cloud\essentia-web\` (`index.html` = copia del HTML) |
-| Versión Shopify | `mipileta.com.ar/pages/essentia` — **la página está OCULTA** (404 para visitantes) |
+| Versión Shopify | **`mipileta.com.ar/pages/essentia` — PUBLICADA** (25/8/2026, visible al público) |
 | Tienda / tema | `mipileta.myshopify.com`, tema **Horizon en vivo #181549990252** (CLI ya autenticado) |
 | Respaldo del tema | `Cloud\backup-tema-horizon\` (bajado antes de tocar producción) |
 
@@ -164,6 +164,27 @@ La pagina bajaba **18 MB** en celular. Ahora baja **1,5 MB**. Que se hizo:
 - **Titulos centrados en mobile**: "Conoce cada detalle" y "Essentia desde adentro" van a la
   izquierda por estilo inline y en pantalla angosta desentonaban.
 
+## Cómo publicar / despublicar la página en Shopify
+
+El CLI de temas NO maneja páginas: se hace con el Admin API vía `shopify store execute`.
+
+**Ojo con el dominio.** El permanente de la tienda es **`v351rf-0f.myshopify.com`**.
+`mipileta.myshopify.com` sirve para `theme push`, pero `store auth` lo rechaza con
+"OAuth callback store does not match". Son la misma tienda: `v351rf-0f` redirige a
+`mipileta.com.ar`. La página es `gid://shopify/Page/711251525996`.
+
+Ver el estado:
+
+```bash
+shopify store execute -s v351rf-0f.myshopify.com --json -q "{ pages(first: 5, query: \"handle:essentia\") { nodes { id handle isPublished } } }"
+```
+
+Publicar (o `false` para volver a ocultarla):
+
+```bash
+shopify store execute -s v351rf-0f.myshopify.com --json --allow-mutations -q "mutation P($id: ID!) { pageUpdate(id: $id, page: { isPublished: true }) { page { handle isPublished } userErrors { field message } } }" -v "{\"id\":\"gid://shopify/Page/711251525996\"}"
+```
+
 ## 6. Pendientes abiertos
 
 **Esperando respuesta del cliente**
@@ -172,8 +193,13 @@ La pagina bajaba **18 MB** en celular. Ahora baja **1,5 MB**. Que se hizo:
       con el cliente si aparece una foto que lo contradiga.
 - [x] ~~La rejilla flexible no existe como producto~~ → **sí existe** (`rejilla-flexible`), ya enlazada.
 - [ ] ¿Reponer el **dosificador**? Se sacó porque no estaba entre las fotos nuevas.
-- [ ] **Publicar la página de Shopify** (hoy oculta). Al publicarla: verificar en vivo y hacer
-      una **suscripción de prueba** al newsletter para confirmar el alta con etiqueta.
+- [x] ~~**Publicar la página de Shopify**~~ → **publicada el 25/8/2026**. Verificado en vivo:
+      HTTP 200, sin gate de contraseña (el build lo elimina y aborta si quedan restos), las 23
+      imágenes cargan desde el CDN de Shopify, y el newsletter quedó como **form nativo**
+      (`form_type=customer`, `action=/contact`) con la etiqueta viajando bien
+      (`newsletter, <perfil>`, comprobado cambiando de pill sin enviar nada).
+      **Falta la suscripción de prueba real:** crea un cliente en la tienda del cliente, así
+      que conviene hacerla a mano o pedirla explícitamente.
 
 **Técnicos**
 - [ ] **Hero en alta resolución** (el actual es 1672px, se ablanda en 2K/4K). Ideal ~3344x1630,
