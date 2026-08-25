@@ -14,7 +14,7 @@ Landing de la **línea Essentia** (piletas de cocina de acero inox de Mi Pileta)
 | Versión GitHub Pages | https://diogenes-ortiz.github.io/essentia-mipileta/ — **clave `essentia2026`** |
 | Carpeta del repo | `Cloud\essentia-web\` (`index.html` = copia del HTML) |
 | Versión Shopify | **`mipileta.com.ar/pages/essentia` — PUBLICADA** (25/8/2026, visible al público) |
-| Tienda / tema | `mipileta.myshopify.com`, tema **Horizon en vivo #181549990252** (CLI ya autenticado) |
+| Tienda / tema | `mipileta.myshopify.com`. **EL TEMA EN VIVO CAMBIA**: al 25/8/2026 es **"Home nueva (borrador)" #191148360044**; Horizon #181549990252 quedó despublicado. Verificar SIEMPRE con `shopify theme list` antes de publicar. |
 | Respaldo del tema | `Cloud\backup-tema-horizon\` (bajado antes de tocar producción) |
 
 ## 2. Cómo publicar (los dos lados, siempre juntos)
@@ -29,7 +29,9 @@ cd essentia-web && git add -A && \
   git push origin master && cd ..
 # 2) Shopify (regenera el Liquid y sube SOLO lo indicado, sin borrar nada)
 node build-essentia-shopify.js
-shopify theme push --theme 181549990252 --store mipileta.myshopify.com \
+# OJO: 191148360044 es el tema EN VIVO al 25/8/2026 (antes era 181549990252).
+# Verificar con `shopify theme list` y, ante la duda, subir a los dos.
+shopify theme push --theme 191148360044 --store mipileta.myshopify.com \
   --path essentia-shopify --allow-live --nodelete \
   --only "templates/page.essentia.liquid" --only "assets/*"
 ```
@@ -80,9 +82,19 @@ shopify theme push --theme 181549990252 --store mipileta.myshopify.com \
     `gh api repos/diogenes-ortiz/essentia-mipileta/pages/builds?per_page=5`
     (el campo `status` tiene que decir `built`, no `errored`).
 
+12. **El tema en vivo puede cambiar y la página se cae sin aviso.** El 25/8/2026 se publicó
+    el tema nuevo de la home y Horizon quedó despublicado. Como `page.essentia.liquid` solo
+    existía en Horizon, `mipileta.com.ar/pages/essentia` empezó a dar **404** — con la página
+    marcada como `isPublished: true`, lo cual despista. A Zíngara le pasó lo mismo.
+    **Antes de cada push: `shopify theme list --store mipileta.myshopify.com`** y mirar cuál
+    dice `[live]`. Conviene subir el template a los dos temas, por si vuelven a rotar.
+
 ## 5. Estado de cada sección
 
 1. **Nav** sticky: Concepto · Modelos · Compra segura · Contacto (`scroll-margin-top:88px`).
+   **El logo vuelve a la home** (`mipileta.com.ar`): antes era un `<img>` suelto y desde la
+   landing no había forma de volver. El `<a class="logo-link">` lleva `line-height:0`, si no le
+   suma unos px de alto a la barra.
    **Contacto abre WhatsApp** (antes iba al mapa, que quedó oculto); el href se arma en el
    mismo script de `WA_NUMERO`, así el número está en un solo lugar.
 2. **Hero**: foto `essentia-hero-trio.png` + wordmark oficial (máscara CSS). **Video encima**
