@@ -185,6 +185,23 @@ Publicar (o `false` para volver a ocultarla):
 shopify store execute -s v351rf-0f.myshopify.com --json --allow-mutations -q "mutation P($id: ID!) { pageUpdate(id: $id, page: { isPublished: true }) { page { handle isPublished } userErrors { field message } } }" -v "{\"id\":\"gid://shopify/Page/711251525996\"}"
 ```
 
+## URLs cortas (redirecciones de Shopify)
+
+La tienda usa redirecciones 301 para tener URLs lindas. Se crean con el Admin API,
+igual que la publicación de la página (ver más arriba el tema del dominio permanente):
+
+| URL corta | Va a |
+|---|---|
+| `mipileta.com.ar/essentia` | `/pages/essentia` (creada 25/8/2026) |
+| `mipileta.com.ar/zingara` | `/pages/zingara` |
+| `mipileta.com.ar/garantia` | `/pages/garantia` |
+
+Funcionan sin distinguir mayúsculas y con barra final. Para crear otra:
+
+```bash
+shopify store execute -s v351rf-0f.myshopify.com --json --allow-mutations -q "mutation C($r: UrlRedirectInput!) { urlRedirectCreate(urlRedirect: $r) { urlRedirect { id path target } userErrors { field message } } }" -v "{\"r\":{\"path\":\"/loquesea\",\"target\":\"/pages/loquesea\"}}"
+```
+
 ## 6. Pendientes abiertos
 
 **Esperando respuesta del cliente**
@@ -208,8 +225,10 @@ shopify store execute -s v351rf-0f.myshopify.com --json --allow-mutations -q "mu
       Recoleta). **La sección está OCULTA** (`display:none`) hasta tener los datos reales.
 - [ ] **Barra escurridora en negro** con el MISMO encuadre que la satinada, para que también alterne.
 - [ ] Link real de **Mercado Libre** (hoy es una nota de texto porque no hay a dónde mandar).
-- [ ] El botón final **"Conocé la línea Zíngara"** apunta a GitHub Pages, que tiene gate
-      (clave `zingara2026`). Cuando Zíngara esté en Shopify, cambiar la URL.
+- [x] ~~El botón final "Conocé la línea Zíngara" apunta a GitHub Pages (con gate)~~ →
+      **resuelto el 25/8/2026**: la landing de Zíngara ya está publicada en Shopify, así que el
+      botón va a `mipileta.com.ar/zingara`. Importaba: con Essentia pública, el botón mandaba
+      a un muro de contraseña.
 
 ## 7. Herramientas útiles ya instaladas
 
