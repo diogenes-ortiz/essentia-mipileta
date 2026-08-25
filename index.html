@@ -54,7 +54,10 @@
   .topbar .inner{
     display:flex;align-items:center;justify-content:space-between;gap:1rem;position:relative;
   }
-  .topbar .logo{height:48px;width:auto;}
+  .topbar .logo{height:48px;width:auto;display:block;}
+  /* el enlace envuelve al logo y es el nuevo hijo flex de .inner: sin line-height
+     propio agregaria unos px de alto a la barra */
+  .topbar .logo-link{display:flex;align-items:center;line-height:0;text-decoration:none;}
   .topbar nav{display:flex;gap:2.5rem;}
   .topbar nav a{
     font-size:1.05rem;font-weight:300;color:#fff;opacity:.9;
@@ -831,7 +834,9 @@
 <!-- ================= TOP NAV ================= -->
 <header class="topbar">
   <div class="container inner">
-    <img class="logo" src="assets/mp-sintesis.png?v=2" alt="Logo">
+    <a class="logo-link" href="https://mipileta.com.ar/" aria-label="Ir a la home de Mi Pileta">
+      <img class="logo" src="assets/mp-sintesis.png?v=2" alt="Mi Pileta">
+    </a>
     <button class="hamburger" id="hamburger" aria-label="Menú"><span></span><span></span><span></span></button>
     <nav id="topnav">
       <a href="#signature">Concepto</a>
