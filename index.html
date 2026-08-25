@@ -226,6 +226,9 @@
   .t3-panel.active{display:block;animation:fade .4s ease;}
   .t3-panel p{color:var(--muted);font-weight:300;max-width:640px;margin:0 auto;}
   .t3-panel .swatches{justify-content:center;margin-top:18px;}
+  /* enfasis dentro de los parrafos de los paneles: mismo tratamiento que .model-size strong
+     (el strong solo resolvia a 400 sobre un parrafo de 300, casi no se distinguia) */
+  .t3-panel p strong{color:#e9ecef;font-weight:500;}
   .t3-panel .color-media,.t3-panel .ph{max-width:560px;width:100%;margin:26px auto 0;}
   .t3-panel .inst-media{max-width:560px;width:100%;margin:26px auto 0;border-radius:16px;overflow:hidden;}
   .t3-panel .inst-media img{width:100%;display:block;aspect-ratio:4/3;object-fit:cover;}
@@ -974,9 +977,9 @@
              sin uso (antes llevaba assets/instalacion.jpg). La foto ya viene recortada
              a 1:1 y el marco va con --cuadrada, así que el object-fit no recorta nada. -->
         <div class="t3-panel" data-t3="desague">
-          <p>Desagüe cuadrado, en línea con la geometría de la pileta y en el mismo acero inoxidable. Son tres piezas: la tapa, el filtro que se retira para limpiarlo y el cuerpo del desagüe.</p>
+          <p>Desagüe cuadrado, en línea con la geometría de la pileta y en el mismo acero inoxidable. Son tres piezas: la tapa, el <strong>cestillo</strong> —que sella la pileta y la deja hermética— y el cuerpo del desagüe.</p>
           <div class="inst-media inst-media--cuadrada">
-            <img src="assets/desague-essentia.jpg?v=3" alt="Despiece del desagüe de Essentia: tapa, filtro y cuerpo" loading="lazy">
+            <img src="assets/desague-essentia.jpg?v=3" alt="Despiece del desagüe de Essentia: tapa, cestillo y cuerpo" loading="lazy">
           </div>
         </div>
       </div>

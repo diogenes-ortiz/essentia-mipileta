@@ -41,6 +41,8 @@ shopify theme push --theme 181549990252 --store mipileta.myshopify.com \
 
 - La terminación rose se llama **"rose"**, nunca "cobre".
 - El tratamiento de color es **"PVD"**, nunca "PDB".
+- La pieza del medio del desagüe es el **"cestillo"**, nunca "filtro": no cuela, **sella la
+  pileta y la deja hermética**.
 - Piletas siempre **de la más chica a la más grande**: 640 → 660 → 670 → 671.
 - **La 620 está fuera** de la landing (sus fotos siguen en assets por si vuelve).
   Si vuelve, ojo: **la 620 es más grande que la 640**, el orden por tamaño NO es el numérico.
@@ -100,7 +102,7 @@ shopify theme push --theme 181549990252 --store mipileta.myshopify.com \
      colores, arrancando en la **660 rose**.
    - *Instalación*: **esquema SVG en corte dibujado por código** (mesada tramada vs pileta de
      acero) con los 3 modos + link "Ver tutorial" que **cambia de video de YouTube según el modo**.
-   - *Desagüe*: despiece apilado (tapa + filtro + cuerpo) en `desague-essentia.jpg`, recortado
+   - *Desagüe*: despiece apilado (tapa + **cestillo** + cuerpo) en `desague-essentia.jpg`, recortado
      1:1 y con marco cuadrado (`.inst-media--cuadrada`). El texto lo redactamos nosotros:
      falta que lo valide el cliente.
 5. **"Essentia desde adentro"**: planos técnicos en acordeón.
